@@ -1,26 +1,40 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Signup from "./components/Auth/Signup/Signup";
+
+import { Route, Routes  } from "react-router-dom";
+
 import Login from "./components/Auth/Login/Login";
+import Signup from "./components/Auth/Signup/Signup";
+import Customerapplyloan from "./components/Customer/Customerapplyloan/Customerapplyloan";
+import Home from "./components/Admin/Home";
 
 function App() {
+
+
   return (
     <div className="App">
-      {/* <nav>
-        <ul>
-          <li><Link to="/"> Home </Link></li>
-          <li><Link to="/signup"> signup </Link></li>
-          <li><Link to="/login"> login </Link></li>
-        </ul>
-      </nav> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+     <BrowserRouter>
+    <Routes>
+        {/* PUBLIC ROUTE */}
+
+        <Route path="/" element={<Login  />} />
+
+        {/* USER ROUTES */}
+
+        <Route path="/user/signup" element={<Signup />} />
+        <Route path="/user/home"  element={<Customerapplyloan/>}/>
+        
+        <Route path="/user/login"  element= { <Login/>} />
+
+        {/* ADMIN ROUTES */}
+        <Route path="/admin/home" element={<Home/>} />
+        <Route path="/admin/login"  element= { <Login/>} />
+
+
+     </Routes>
+     </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+ export default App;
+

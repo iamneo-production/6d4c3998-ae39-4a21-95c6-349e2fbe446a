@@ -1,37 +1,42 @@
 import React, {useState} from "react";
 import {Link } from "react-router-dom";
+import axios from "axios";
 import './Signup.css'
 
 export default function Signup() {
 
-  const [userOrAdmin, setAdminOrUser] = useState("");
+  const [userType, setAdminOrUser] = useState("");
   
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [authenticated, setAuthenticated] = useState(false)
 
-  const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
+   const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
   const mobileNumberRegex = /^\d{10}$/;
 
 
 
   function handleSignup(){
-    if(userOrAdmin==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
+    if(userType==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
       alert("Please enter all fields")
       console.log("Please enter all details")
     }
     else if(!emailRegex.test(email)){
+      
       console.log("Invalid Email");
       alert("Invalid Email");
       return;
-    }else if(!passwordRegex.test(password)){
+    }
+    else if(!passwordRegex.test(password)){  
       alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       return;
-    }else if(password!==confirmPassword){
+    }
+    else if(password!==confirmPassword){
       alert("Passwords does not match")
       return;
     }
@@ -41,13 +46,31 @@ export default function Signup() {
       return;
     }
     else{
-      alert("Super ")
-      if(userOrAdmin==="user"){
-        alert(`Signed in as ${userOrAdmin}`)
-      }else if(userOrAdmin==="admin"){
-        alert(`Signed in as ${userOrAdmin}`)
-      }
-      
+
+      const user = {
+        
+        "email":email,
+        "mobileNumber":mobileNumber,
+        "password":password,
+        "userRole":userType,
+        "username":userName
+      };
+      console.log(user);
+
+      axios.post("http://localhost:6060/user/signup", user)
+              .then((response)=>{
+                  console.log(response.status,response.data);
+                  alert(`${response.data.userRole} added`);
+                  if(userType==="admin"){
+                    window.location.href = "/admin/login";
+                  }else {
+                    window.location.href = "/user/login";
+                 }
+                
+              }).catch((error)=>{
+                alert("Error registering user/admin"+error.message);
+              })
+
     }
   }
   return (
@@ -59,12 +82,13 @@ export default function Signup() {
         
           <div>
             <input
+              data-testid="userType"
               class="input-style-signup" 
               type="text"
               name="user"
               id="user"
               placeholder="Enter admin/user"
-              value={userOrAdmin}
+              value={userType}
               onChange={(e)=>{
                   setAdminOrUser(e.target.value)
               }}
@@ -72,6 +96,7 @@ export default function Signup() {
           </div>
           <div>
             <input
+            data-testid="email"
               class="input-style-signup" 
               type="email"
               name="email"
@@ -85,6 +110,7 @@ export default function Signup() {
           </div>
           <div>
             <input
+            data-testid="username"
               class="input-style-signup" 
               type="text"
               name="username"
@@ -98,6 +124,7 @@ export default function Signup() {
           </div>
            <div>
             <input
+            data-testid="mobileNumber"
             class="input-style-signup" 
               type="text"
               name="mobileNumber"
@@ -111,6 +138,7 @@ export default function Signup() {
           </div>
           <div>
             <input
+            data-testid="password"
             class="input-style-signup" 
               type="password"
               name="password"
@@ -124,6 +152,7 @@ export default function Signup() {
           </div>
           <div>
             <input
+             data-testid="confirmPassword"
             class="input-style-signup" 
               type="password"
               name="confirmPassword"
@@ -137,6 +166,7 @@ export default function Signup() {
           </div>
           <div>
             <input
+            data-testid="submitButton"
             class="input-style-signup" 
               type="submit"
               id="submitButton"
@@ -148,7 +178,7 @@ export default function Signup() {
           </div>
           <p className="loginPara" >
                   Aldready a user ?
-              <Link id="signinLink" to="/login">&nbsp; Login</Link>
+              <Link data-testid='signinLink' id="signinLink" to="/user/login">&nbsp; Login</Link>
 
           </p>
         </div>
