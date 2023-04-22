@@ -57,10 +57,10 @@ export default function Signup() {
       };
       console.log(user);
 
-      axios.post("http://localhost:6060/user/signup", user)
+      axios.post("https://8080-eaedbfccddaeafbeafbbdcdbaec.project.examly.io/user/signup", user)
               .then((response)=>{
                   console.log(response.status,response.data);
-                  alert(`${response.data.userRole} added`);
+                  //alert(`${response.data.userRole} added`);
                   if(userType==="admin"){
                     window.location.href = "/admin/login";
                   }else {

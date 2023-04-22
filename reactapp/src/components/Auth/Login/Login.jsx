@@ -39,10 +39,10 @@ export default function Login() {
         "password":password
       };
       
-      axios.post("http://localhost:6060/user/login", user)
+      axios.post("https://8080-eaedbfccddaeafbeafbbdcdbaec.project.examly.io/user/login", user)
       .then((response)=>{
           
-          //alert(` loggin success `);
+          alert(` loggin success `);
           console.log(response.data.userModel.userRole,response.data.userModel)
           if(response.data.userModel.userRole==="user"){
             console.log("User home page")

@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Routes  } from "react-router-dom";
+import { Route, Routes,BrowserRouter } from "react-router-dom";
 
 import Login from "./components/Auth/Login/Login";
 import Signup from "./components/Auth/Signup/Signup";
@@ -8,8 +8,6 @@ import Customerapplyloan from "./components/Customer/Customerapplyloan/Customera
 import Home from "./components/Admin/Home";
 
 function App() {
-
-
   return (
     <div className="App">
      <BrowserRouter>
