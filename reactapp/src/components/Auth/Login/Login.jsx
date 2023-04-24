@@ -22,10 +22,12 @@ export default function Login() {
       alert("Invalid Email");
       console.log("Invalid Email");
       return 
-    }else if(!passwordRegex.test(password)){
-      alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      return 
-    }else{
+    }
+    // else if(!passwordRegex.test(password)){
+    //   alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+    //   return 
+    // }
+    else{
       alert("You are awesome")
     }
 

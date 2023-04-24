@@ -8,24 +8,6 @@ import Signup from "./components/Auth/Signup/Signup";
 
 function App() {
 
-  // const isAuthenticated = localStorage.getItem("token") !== null;
-  // const userType = localStorage.getItem("userType");
-
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [userType, setUserType] = useState("user");
-
-  // const canActivate = (userRole) => {
-  //   if (isAuthenticated) {
-  //     if (userRole === userType) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // };
-  
 
 
   return (

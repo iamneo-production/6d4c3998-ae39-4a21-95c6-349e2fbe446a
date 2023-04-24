@@ -29,11 +29,13 @@ export default function Signup() {
       console.log("Invalid Email");
       alert("Invalid Email");
       return;
-    }else if(!passwordRegex.test(password)){
-      alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      return;
-    }else if(password!==confirmPassword){
+    }
+    // else if(!passwordRegex.test(password)){
+    //   alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+    //   console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+    //   return;
+    // }
+    else if(password!==confirmPassword){
       alert("Passwords does not match")
       return;
     }
