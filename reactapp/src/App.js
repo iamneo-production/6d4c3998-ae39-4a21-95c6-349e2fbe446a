@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -20,8 +21,42 @@ import Payment from "./components/Customer/Payment/Payment";
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+=======
+import React,{useState,useEffect} from "react"
+import UserContext from "./context/UserContext"
+import {Routes,Route} from "react-router-dom"
+import Login from "./components/Auth/Login/Login"
+import Signup from "./components/Auth/Signup/Signup";
+
+import ApplyForm from "./components/Customer/ApplyForm/ApplyForm";
+import UserSharedLayout from "./sharedlayout/UserSharedLayout";
+import AdminSharedLayout from "./sharedlayout/AdminSharedLayout";
+import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage"
+import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm"
+import Customerprofile from "./components/Customer/Customerprofile/Customerprofile";
+import LoanStatus from "./components/Customer/LoanStatus/LoanStatus";
+
+import './App.css';
+
+
+>>>>>>> 97abf19 (user-admin-routes-protection)
 function App() {
+
+  const [userModel, setUserModel] = useState(() => {
+    const storedUserModel = localStorage.getItem("userModel");
+
+    if (storedUserModel) {
+      return JSON.parse(storedUserModel);
+    }
+
+    return null;
+  });
+  useEffect(() => {
+    localStorage.setItem("userModel", JSON.stringify(userModel));
+  }, [userModel]);
+
   return (
+<<<<<<< HEAD
     <JwtTokenProvider>
       <UserProvider>
         <div className="App">
@@ -59,6 +94,36 @@ function App() {
         </div>
       </UserProvider>
     </JwtTokenProvider>
+=======
+    <UserContext.Provider value={{ userModel, setUserModel }}>
+
+    
+    <div className="App">
+      <Routes> 
+         {/* PUBLIC ROUTE */} 
+         <Route path="/" element={<Login />} /> 
+         <Route path="/user/signup" element={<Signup />} /> 
+         <Route path="/user/login"  element= { <Login/>} /> 
+         <Route path="/admin/login"  element= { <Login/>} /> 
+                        
+                         {/* USER ROUTES */}
+               {/* This is kinda home page for user */}
+        <Route path="/user/home" element={<UserSharedLayout />} >
+          <Route index element={<ApplyForm/>}/>
+          <Route path="loanstatus" element={<LoanStatus/>}/>
+          <Route path="profile" element={<Customerprofile/>}/>
+        </Route>
+  
+                         {/* ADMIN ROUTES */} 
+        <Route path="/admin/home" element={<AdminSharedLayout />} >
+          <Route index element={<AdminHomePage/>}/>
+          <Route path="approvalform" element={<ApprovalForm/>}/>
+        </Route >
+  
+     </Routes>
+    </div>
+  </UserContext.Provider>
+>>>>>>> 97abf19 (user-admin-routes-protection)
   );
 }
 

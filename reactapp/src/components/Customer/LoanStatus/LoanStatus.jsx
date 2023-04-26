@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useContext,useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../../context/UserContext';
@@ -9,17 +10,33 @@ export default function LoanStatus() {
   const [loanId, setLoanId] = useState("")
   const [loanDetails, setLoanDetails] = useState(null)
   const [showLoan, setShowLoan] = useState(false)
+=======
+import React, { useEffect,useContext } from 'react'
+import { Link,useNavigate } from 'react-router-dom'
+import UserContext from '../../../context/UserContext'
+
+
+export default function LoanStatus() {
+  const { userModel,setUserModel } = useContext(UserContext);
+>>>>>>> 97abf19 (user-admin-routes-protection)
   const navigate = useNavigate();
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('userModel'));
     if (storedUser && storedUser.userRole === 'admin') {
+<<<<<<< HEAD
       localStorage.removeItem('userModel');
       console.log('token removal is done by admin home');
       setUserModel(null);
+=======
+      localStorage.removeItem("userModel");
+      console.log("token removal is done by admin home")
+      setUserModel(null)
+>>>>>>> 97abf19 (user-admin-routes-protection)
       navigate('/user/login');
     }
   }, [navigate]);
 
+<<<<<<< HEAD
  async function handleTrack(e){
     e.preventDefault()
 
@@ -90,3 +107,18 @@ export default function LoanStatus() {
     </div>
   );
 }
+=======
+
+  return (
+    <div>
+      <h1>Loan status</h1>
+      {userModel && (
+        <div>
+          <p>User email: {userModel.email}</p>
+          <p>Your role: {userModel.userRole}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+>>>>>>> 97abf19 (user-admin-routes-protection)
