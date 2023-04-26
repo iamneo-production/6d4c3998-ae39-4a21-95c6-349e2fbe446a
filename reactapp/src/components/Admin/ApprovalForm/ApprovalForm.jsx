@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
-import './Adminapprovedloan.css';
+import React, { useState,useContext,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from "../../../context/UserContext"
 
-function Adminapprovedloan() {
+import './ApprovalForm.css';
+
+function ApprovalForm() {
   const [searchQuery, setSearchQuery] = useState('');
+
+          //  User state managment
+          const { userModel,setUserModel } = useContext(UserContext);
+          const navigate = useNavigate();
+          useEffect(() => {
+            const storedUser = JSON.parse(localStorage.getItem('userModel'));
+            if (storedUser && storedUser.userRole === 'admin') {
+              localStorage.removeItem("userModel");
+            console.log("token removal is done by admin home")
+            setUserModel(null)
+              console.log("token removal is done by user home")
+              navigate('/user/login');
+            }
+          }, [navigate]);
+
 
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -67,4 +85,4 @@ function Adminapprovedloan() {
   );
 }
 
-export default Adminapprovedloan;
+export default ApprovalForm;
