@@ -1,10 +1,16 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, {useState,useContext,useEffect } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import UserContext from "../../../context/UserContext";
+
+import axios from "axios";
 import './Login.css'
 
 
 
 export default function Login() {
+
+  const navigate = useNavigate();
+  const { userModel,setUserModel } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,12 +29,38 @@ export default function Login() {
       console.log("Invalid Email");
       return 
     }
-    // else if(!passwordRegex.test(password)){
-    //   alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-    //   return 
-    // }
+    else if(!passwordRegex.test(password)){
+      alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      return 
+    }
     else{
-      alert("You are awesome")
+      //alert("You are awesome")
+            
+      const user = {
+        "email":email,
+        "password":password
+      };
+      
+      axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/login", user)
+      .then((response)=>{
+          
+          //alert(` loggin success `);
+          console.log(response.data.userModel.userRole,response.data.userModel)
+          if(response.data.userModel.userRole==="user"){
+            console.log("User home page")
+            setUserModel(response.data.userModel);
+            navigate("/user/home");
+
+          }else if(response.data.userModel.userRole==="admin"){
+            console.log("Admin home page")
+            setUserModel(response.data.userModel);
+           navigate("/admin/home")
+          }
+
+      }).catch((error)=>{
+        alert("Error logging user/admin"+error.message);
+      })
+      
     }
 
   }

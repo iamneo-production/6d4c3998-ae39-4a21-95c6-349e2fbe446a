@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import {Link } from "react-router-dom";
+
+import axios from "axios";
 import './Signup.css';
 
 
@@ -30,11 +32,11 @@ export default function Signup() {
       alert("Invalid Email");
       return;
     }
-    // else if(!passwordRegex.test(password)){
-    //   alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-    //   console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-    //   return;
-    // }
+    else if(!passwordRegex.test(password)){
+      alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      return;
+    }
     else if(password!==confirmPassword){
       alert("Passwords does not match")
       return;
@@ -46,10 +48,29 @@ export default function Signup() {
     }
     else{
 
+      const user = {
+        
+        "email":email,
+        "mobileNumber":mobileNumber,
+        "password":password,
+        "userRole":userType,
+        "username":userName
+      };
+      console.log(user);
 
-      
-
-  console.log("signup")
+      axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/signup", user)
+              .then((response)=>{
+                  console.log(response.status,response.data);
+                  alert(`${response.data.userRole} added`);
+                  if(userType==="admin"){
+                    window.location.href = "/admin/login";
+                  }else {
+                    window.location.href = "/user/login";
+                 }
+                
+              }).catch((error)=>{
+                alert("Error registering user/admin"+error.message);
+              })
       
     }
   }
