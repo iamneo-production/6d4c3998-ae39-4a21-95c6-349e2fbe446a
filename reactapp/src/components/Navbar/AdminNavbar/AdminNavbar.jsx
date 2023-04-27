@@ -1,7 +1,7 @@
 import { FaBars } from 'react-icons/fa';
 import React,{useState,useContext} from 'react'
 import {Link,useNavigate} from 'react-router-dom';
-import UserContext from '../../context/UserContext';
+import UserContext from "../../../context/UserContext"
 import './AdminNavbar.css';
 
 function AdminNavbar() {
@@ -35,7 +35,7 @@ function AdminNavbar() {
       }>
       <ul>
         <li >
-          <a href="/appliedloans" id='adminAppliedLoans'>Applied Loans</a>
+          <a href="/approvalform" id='adminAppliedLoans'>Applied Loans</a>
         </li>
         <li id='AdminLoanDetails'>
           <a href="/loandetails">Loan Details</a>
