@@ -67,15 +67,14 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="navbar-login">
-         Login
-      </div>
-      <div className="login-form">
+     <div className="login-form">
+      <h1 className="login-title"> Login </h1>
+     
         <div data-testid="loginBox" className="login-box">
           <div>
             <input
             data-testid="email"
-            class = "input-style-login"
+            className = "input-style-login"
               type="email"
               name="email"
               id="email"
@@ -88,7 +87,7 @@ export default function Login() {
           <div>
             <input
             data-testid="password"
-            class = "input-style-login"
+            className = "input-style-login"
               type="password"
               name="password"
               id="password"
@@ -101,7 +100,7 @@ export default function Login() {
           <div className="container-btn-para" >
             <input
             data-testid="loginButton"
-              class = "input-style-login"
+              className = "login-btn"
               type="submit"
               id="loginButton"
               value="Login"
@@ -110,14 +109,20 @@ export default function Login() {
               }}
             />
             <p className="loginPara">
-              New user/admin
-              <Link data-testid="signupLink" id="signinLink" to="/user/signup">
-                 &nbsp;  Signup
+               &nbsp; New user/admin
+              <Link 
+                data-testid="signupLink" 
+                id="signinLink" 
+                to="/user/signup">
+                   &nbsp;
+                   Signup
               </Link>
             </p>
           </div>
         </div>
-      </div>
+      
+     </div>
+     
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React,{useContext} from 'react'
 import {Link,useNavigate} from 'react-router-dom';
-import UserContext from '../context/UserContext';
+import UserContext from '../../context/UserContext';
 
-export default function Navbar() {
+export default function UserNavbar() {
   const { userModel ,setUserModel} = useContext(UserContext);
   const navigate = useNavigate();
 
