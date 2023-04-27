@@ -1,12 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import UserNavbar from '../components/Navbar/UserNavbar'
 
 
 export default function UserSharedLayout() {
   return (
     <div>
-      <Navbar/>
+      <UserNavbar/>
       <Outlet/>
     </div>
   )
