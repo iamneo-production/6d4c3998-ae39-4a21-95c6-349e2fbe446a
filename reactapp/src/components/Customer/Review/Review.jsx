@@ -11,7 +11,7 @@ function Review() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Comments:
+        Comments :
         <input
           type="text"
           value={comments}

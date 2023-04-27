@@ -34,7 +34,7 @@ const Profile = () => {
         </div>
 
         <div className="form-field">
-          <label htmlFor="monthlyEmi">Monthly EMI:</label>
+          <label htmlFor="monthlyEmi">Monthly EMI :</label>
           <span id="monthlyEmi">{"customer.monthlyemi"}</span>
         </div>
       </form>
