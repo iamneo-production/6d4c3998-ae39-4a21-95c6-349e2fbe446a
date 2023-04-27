@@ -9,7 +9,7 @@ import UserSharedLayout from "./sharedlayout/UserSharedLayout";
 import AdminSharedLayout from "./sharedlayout/AdminSharedLayout";
 import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage"
 import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm"
-import Customerprofile from "./components/Customer/Customerprofile/Customerprofile";
+import Profile from "./components/Customer/Profile/Profile";
 import LoanStatus from "./components/Customer/LoanStatus/LoanStatus";
 
 import './App.css';
@@ -47,7 +47,7 @@ function App() {
         <Route path="/user/home" element={<UserSharedLayout />} >
           <Route index element={<ApplyForm/>}/>
           <Route path="loanstatus" element={<LoanStatus/>}/>
-          <Route path="profile" element={<Customerprofile/>}/>
+          <Route path="profile" element={<Profile/>}/>
         </Route>
   
                          {/* ADMIN ROUTES */} 

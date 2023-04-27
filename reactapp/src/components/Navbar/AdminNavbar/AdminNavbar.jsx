@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
-import './Navbar.css';
+import React,{useState,useContext} from 'react'
+import {Link,useNavigate} from 'react-router-dom';
+import UserContext from '../../context/UserContext';
+import './AdminNavbar.css';
 
-function Navbar() {
+function AdminNavbar() {
 
   const [isNavExpanded, setIsNavExpanded] = useState(false)
+  const { userModel ,setUserModel} = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    setUserModel(null);
+    // localStorage.removeItem("token");
+     localStorage.removeItem("userModel");
+    navigate("/user/login");
+  }
 
   return (
     <nav className="navigation">
@@ -38,4 +49,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default AdminNavbar;
