@@ -1,7 +1,7 @@
 import React, {useState,useContext,useEffect } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import UserContext from "../../../context/UserContext";
-
+import { loginUser } from "../../../utils/userApi";
 import axios from "axios";
 import './Login.css'
 
@@ -19,7 +19,7 @@ export default function Login() {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
  
  
-  function handleLogin() {
+  async function handleLogin() {
     if(email==="" || password===""){
       alert("Please enter all fields")
       console.log("Enter all fields")
@@ -34,33 +34,22 @@ export default function Login() {
       return 
     }
     else{
-      //alert("You are awesome")
-            
-      const user = {
-        "email":email,
-        "password":password
-      };
-      
-      axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/login", user)
-      .then((response)=>{
-          
-          //alert(` loggin success `);
-          console.log(response.data.userModel.userRole,response.data.userModel)
-          if(response.data.userModel.userRole==="user"){
-            console.log("User home page")
-            setUserModel(response.data.userModel);
-            navigate("/user/home");
 
-          }else if(response.data.userModel.userRole==="admin"){
-            console.log("Admin home page")
-            setUserModel(response.data.userModel);
-           navigate("/admin/home")
-          }
+      const response = await loginUser(email, password);
+      try{
+        if(response.data.userModel.userRole==="user"){
+          console.log("User home page")
+          setUserModel(response.data.userModel);
+          navigate("/user/home");
 
-      }).catch((error)=>{
+        } else if(response.data.userModel.userRole==="admin"){
+          console.log("Admin home page")
+          setUserModel(response.data.userModel);
+         navigate("/admin/home")
+        }
+      }catch(error){
         alert("Error logging user/admin"+error.message);
-      })
-      
+      }
     }
 
   }

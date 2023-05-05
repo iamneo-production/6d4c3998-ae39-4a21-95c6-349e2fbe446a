@@ -7,41 +7,56 @@ import './Signup.css';
 
 export default function Signup() {
 
-  const [userType, setAdminOrUser] = useState("");
+  // const [userType, setAdminOrUser] = useState("");
   
-  const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("")
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(false)
-
-   const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
+  // const [email, setEmail] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [mobileNumber, setMobileNumber] = useState("")
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  
+  const [userData,setUserData] = useState({
+    userType:"",
+    email:"",
+    userName:"",
+    mobileNumber:"",
+    password:"",
+    confirmPassword:""
+  })
+  const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
   const mobileNumberRegex = /^\d{10}$/;
 
 
-
+  function handleChange(e){
+    const {name,value} = e.target;
+    setUserData((prevData)=>{
+      return {
+        ...prevData,
+        [name] : value
+      }
+    })
+  }
   function handleSignup(){
-    if(userType==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
+    if(userData.userType==="" ||  userData.email==="" || userData.userName==="" || userData.mobileNumber==="" || userData.password==="" || userData.confirmPassword===""){
       alert("Please enter all fields")
       console.log("Please enter all details")
     }
-    else if(!emailRegex.test(email)){
+    else if(!emailRegex.test(userData.email)){
       console.log("Invalid Email");
       alert("Invalid Email");
       return;
     }
-    else if(!passwordRegex.test(password)){
+    else if(!passwordRegex.test(userData.password)){
       alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       return;
     }
-    else if(password!==confirmPassword){
+    else if(userData.password!==userData.confirmPassword){
       alert("Passwords does not match")
       return;
     }
-    else if(!mobileNumberRegex.test(mobileNumber)){
+    else if(!mobileNumberRegex.test(userData.mobileNumber)){
       console.log("Invalid mobile number");
       alert("Invalid Mobile no.");
       return;
@@ -50,19 +65,19 @@ export default function Signup() {
 
       const user = {
         
-        "email":email,
-        "mobileNumber":mobileNumber,
-        "password":password,
-        "userRole":userType,
-        "username":userName
+        "email":userData.email,
+        "mobileNumber":userData.mobileNumber,
+        "password":userData.password,
+        "userRole":userData.userType,
+        "username":userData.userName
       };
       console.log(user);
 
       axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/signup", user)
               .then((response)=>{
                   console.log(response.status,response.data);
-                  alert(`${response.data.userRole} added`);
-                  if(userType==="admin"){
+                  alert(`${response.data.userModel.userRole} added`);
+                  if(response.data.userModel.userRole==="admin"){
                     window.location.href = "/admin/login";
                   }else {
                     window.location.href = "/user/login";
@@ -70,6 +85,7 @@ export default function Signup() {
                 
               }).catch((error)=>{
                 alert("Error registering user/admin"+error.message);
+                
               })
       
     }
@@ -86,13 +102,11 @@ export default function Signup() {
               data-testid="userType"
               className="input-style-signup" 
               type="text"
-              name="user"
+              name="userType"
               id="user"
               placeholder="Enter admin/user"
-              value={userType}
-              onChange={(e)=>{
-                  setAdminOrUser(e.target.value)
-              }}
+              value={userData.userType}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -103,10 +117,8 @@ export default function Signup() {
               name="email"
               id="email"
               placeholder="Enter email"
-              value={email}
-              onChange={(e)=>{
-                  setEmail(e.target.value)
-              }}
+              value={userData.email}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -114,13 +126,11 @@ export default function Signup() {
             data-testid="username"
             className="input-style-signup" 
               type="text"
-              name="username"
+              name="userName"
               id="username"
               placeholder="Enter Username"
-              value={userName}
-              onChange={(e)=>{
-                  setUserName(e.target.value)
-              }}
+              value={userData.userName}
+              onChange={handleChange}
             />
           </div>
            <div>
@@ -131,10 +141,8 @@ export default function Signup() {
               name="mobileNumber"
               id="mobileNumber"
               placeholder="Enter Mobilenumber"
-              value={mobileNumber}
-              onChange={(e)=>{
-                  setMobileNumber(e.target.value)
-              }}
+              value={userData.mobileNumber}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -145,10 +153,8 @@ export default function Signup() {
               name="password"
               id="password"
               placeholder="Password"
-              value={password}
-              onChange={(e)=>{
-                  setPassword(e.target.value)
-              }}
+              value={userData.password}
+              onChange={handleChange}
               />
           </div>
           <div>
@@ -159,10 +165,8 @@ export default function Signup() {
               name="confirmPassword"
               id="confirmPassword"
               placeholder=" Confirm Password"
-              value={confirmPassword}
-              onChange={(e)=>{
-                  setConfirmPassword(e.target.value)
-              }}
+              value={userData.confirmPassword}
+              onChange={handleChange}
               />
           </div>
           <div>
