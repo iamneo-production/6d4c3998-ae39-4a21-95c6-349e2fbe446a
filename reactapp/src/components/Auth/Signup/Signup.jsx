@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link } from "react-router-dom";
-
+import {signUpUser} from "../../../utils/userApi"
 import axios from "axios";
 import './Signup.css';
 
@@ -24,7 +24,7 @@ export default function Signup() {
     confirmPassword:""
   })
   const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
   const mobileNumberRegex = /^\d{10}$/;
 
 
@@ -37,7 +37,7 @@ export default function Signup() {
       }
     })
   }
-  function handleSignup(){
+  async function handleSignup(){
     if(userData.userType==="" ||  userData.email==="" || userData.userName==="" || userData.mobileNumber==="" || userData.password==="" || userData.confirmPassword===""){
       alert("Please enter all fields")
       console.log("Please enter all details")
@@ -48,7 +48,7 @@ export default function Signup() {
       return;
     }
     else if(!passwordRegex.test(userData.password)){
-      alert("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      alert("Password must contaion atleast 6 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       return;
     }
@@ -71,22 +71,9 @@ export default function Signup() {
         "userRole":userData.userType,
         "username":userData.userName
       };
-      console.log(user);
-
-      axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/signup", user)
-              .then((response)=>{
-                  console.log(response.status,response.data);
-                  alert(`${response.data.userModel.userRole} added`);
-                  if(response.data.userModel.userRole==="admin"){
-                    window.location.href = "/admin/login";
-                  }else {
-                    window.location.href = "/user/login";
-                 }
-                
-              }).catch((error)=>{
-                alert("Error registering user/admin"+error.message);
-                
-              })
+      console.log("user before sighnup",user);
+      const data = await signUpUser(userData.email,userData.mobileNumber,userData.password,userData.userType,userData.userName)
+      console.log("sts after signup completed",data)
       
     }
   }
@@ -172,7 +159,7 @@ export default function Signup() {
           <div>
             <input
              data-testid="submitButton"
-            className="input-style-signup" 
+             className="signup-button" 
               type="submit"
               id="submitButton"
               value="Submit"
