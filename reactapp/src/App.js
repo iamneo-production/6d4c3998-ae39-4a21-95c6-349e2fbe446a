@@ -53,7 +53,6 @@ function App() {
                          {/* ADMIN ROUTES */} 
         <Route path="/admin/home" element={<AdminSharedLayout />} >
           <Route index element={<AdminHomePage/>}/>
-          <Route path="approvalform" element={<ApprovalForm/>}/>
         </Route >
   
      </Routes>
