@@ -12,7 +12,7 @@ https://sonarcloud.io/summary/overall?id=examly-test_6d4c3998-ae39-4a21-95c6-349
 
 
 ## Project Title : Education Loan Portal
-### Team Members : 
+### Contributors : 
 
 - Ayush Kumar Sinha	
 - Shaama M	
