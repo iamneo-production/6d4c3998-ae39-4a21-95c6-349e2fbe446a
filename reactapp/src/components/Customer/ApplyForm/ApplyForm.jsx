@@ -1,20 +1,28 @@
 import React from "react";
-import './ApplyForm.css'
+import './ApplyForm.css';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function ApplyForm() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate('/Profile');
+  }
 
   return (
-    <div className="apply-form">
+
+    <div className="applyfrom-container">
       <form className="form1">
         <div className="form-group">
           <input className="input-form"
             type="text"
             name="Applicant Name"
             id="enterName"
-            data-testid="enterName"
             placeholder="Enter Applicant Name"
+            data-testid="enterName"
           />
         </div>
         <div className="form-group">
@@ -22,8 +30,8 @@ function ApplyForm() {
             type="text"
             name="address"
             id="enterAddress"
-            data-testid="enterAddress"
             placeholder="Enter Applicant Address"
+            data-testid="enterAddress"
           />
         </div>
 
@@ -32,8 +40,8 @@ function ApplyForm() {
             type="text"
             name="mobileNumber"
             id="enterMobile"
-            data-testid="enterMobile"
             placeholder="Enter Applicant Mobile"
+            data-testid="enterMobile"
           />
         </div>
         <div className="form-group">
@@ -41,8 +49,8 @@ function ApplyForm() {
             type="text"
             name="emailid"
             id="enterEmail"
-            data-testid="enterEmail"
             placeholder="Enter Applicant Email Id"
+            data-testid="enterEmail"
           />
         </div>
         <div className="form-group">
@@ -50,8 +58,8 @@ function ApplyForm() {
             type="text"
             name="aadhaarno"
             id="enterAadhaarNo"
-            data-testid="enterAadhaarNo"
             placeholder="Enter Applicant Aadhaar No "
+            data-testid="enterAadhaarNo"
           />
         </div>
         <div className="form-group">
@@ -59,8 +67,8 @@ function ApplyForm() {
             type="text"
             name="panno"
             id="enterPanNo"
-            data-testid="enterPanNo"
             placeholder="Enter Applicant PAN no "
+            data-testid="enterPanNo"
           />
         </div>
         <div className="form-group">
@@ -68,8 +76,8 @@ function ApplyForm() {
             type="text"
             name="salary"
             id="enterSalary"
-            data-testid="enterSalary"
             placeholder="Enter Applicant Salary"
+            data-testid="enterSalary"
           />
         </div>
         <div className="form-group">
@@ -77,8 +85,8 @@ function ApplyForm() {
             type="text"
             name="loanamount"
             id="enterAmount"
-            data-testid="enterAmount"
             placeholder="Enter Loan Amount Required"
+            data-testid="enterAmount"
           />
         </div>
         <div className="form-group">
@@ -86,12 +94,22 @@ function ApplyForm() {
             type="text" className="input-form"
             name="months"
             id="enterMonths"
-            data-testid="enterMonths"
             placeholder="Enter loan repayment months"
+            data-testid="enterMonths"
           />
         </div>
+        <div>
+          <input className="btn"
+            type="button"
+            name="next"
+            id="next"
+            data-testid="next"
+            value="Next" onClick={handleClick}
+          />
+        </div>
+
       </form>
-    </div>
+    </div >
   );
 }
 

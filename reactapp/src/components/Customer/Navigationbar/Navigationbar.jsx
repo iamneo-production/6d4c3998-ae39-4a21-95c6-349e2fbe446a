@@ -1,10 +1,10 @@
 import { useNavigate} from 'react-router-dom';
 import './Navigationbar.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
-export default function Navigationbar(){
+function Navigationbar(){
     const navigate = useNavigate();
     const [activeTab,setActiveTab]= useState(1);
     const handleTabClick=(tabIndex)=>{
@@ -18,7 +18,7 @@ export default function Navigationbar(){
             <Link className='logout'>Log out</Link>
             <div className="tabs">
                 <ul>
-                    <li onClick={() => {navigate('/ApplyForm');handleTabClick(1);}} className={activeTab === 1 ? 'active' : ''}>Apply Form</li>
+                    <li onClick={() => {navigate('/ApplyForm');handleTabClick(1);}} className={activeTab === 1 ? 'active' : ''}>Apply Loan</li>
                     <li onClick={() => {navigate('/LoanStatus');handleTabClick(2);}} className={activeTab === 2 ? 'active' : ''}>Loan Status</li>
                     <li onClick={() => {navigate('/Profile');handleTabClick(3);}} className={activeTab === 3 ? 'active' : ''}>Profile</li>
                 </ul>
@@ -29,3 +29,5 @@ export default function Navigationbar(){
         </>
     );
 }
+
+export default Navigationbar;
