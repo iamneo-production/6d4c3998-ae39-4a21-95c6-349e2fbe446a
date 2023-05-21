@@ -2,4 +2,8 @@ puppeteer/test.js
 node_modules/
 done
 react
+<<<<<<< HEAD
 junit
+=======
+junit
+>>>>>>> a84f80617592bb97bc9459c408c4a876f2251a97
