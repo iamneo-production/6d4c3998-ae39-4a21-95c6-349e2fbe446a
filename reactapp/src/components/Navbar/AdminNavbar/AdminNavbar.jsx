@@ -3,10 +3,12 @@ import React,{useState,useContext} from 'react'
 import {Link,useNavigate} from 'react-router-dom';
 import UserContext from "../../../context/UserContext"
 import './AdminNavbar.css';
+import ApprovedForm from '../../Admin/ApprovedForm/ApprovedForm';
 
 function AdminNavbar() {
 
   const [isNavExpanded, setIsNavExpanded] = useState(false)
+  const [ showAppliedLoans, setshowAppliedLoans ] = useState(true)
   const { userModel ,setUserModel} = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -16,10 +18,18 @@ function AdminNavbar() {
      localStorage.removeItem("userModel");
     navigate("/user/login");
   }
+  // const handleNavClick = (navId) => {
+  //   if (navId === "adminAppliedLoans") {
+  //     setshowAppliedLoans(true);
+  //   } else {
+  //     setshowAppliedLoans(false);
+  //   }
+  // };
 
   return (
+    <>
     <nav className="navigation">
-    <a href="/" className="brand-name">
+    <a href="/admin/home" className="brand-name">
       Education Loan
     </a>
     <button className="hamburger" 
@@ -35,17 +45,33 @@ function AdminNavbar() {
       }>
       <ul>
         <li >
-          <a href="/approvalform" id='adminAppliedLoans'>Applied Loans</a>
+          {/* <a href="/getAllLoans" id='adminAppliedLoans'>Applied Loans</a> */}
+          <Link
+                to="/admin/getAllLoans"
+                id="adminAppliedLoans"
+                // onClick={() => handleNavClick("adminAppliedLoans")}
+              >
+                Applied Loans
+          </Link>
         </li>
-        <li id='AdminLoanDetails'>
-          <a href="/loandetails">Loan Details</a>
+        <li>
+        <Link
+                to="/admin/LoanDetails"
+                id="AdminLoanDetails"
+                // onClick={() => handleNavClick("AdminLoanDetails")}
+              >
+                Loan Details
+              </Link>
         </li>
         <li id="logout">
-          <a href="/">Logout</a>
+        <Link to="/admin/login">Logout</Link>
         </li>
       </ul>
     </div>
     </nav>
+    {/* {showAppliedLoans ? <>adios</>
+    : <ApprovedForm />} */}
+    </>
   );
 }
 
