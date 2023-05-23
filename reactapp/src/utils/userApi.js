@@ -12,7 +12,7 @@ export async function signUpUser(email, mobileNumber, password, userType, userNa
   
     try {
       const response = await axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/signup", user);
-      console.log(response.status,"response date is :",response.data);
+      console.log(response.status,"response data is :",response.data);
       console.log("userRole is :",response.data.userRole);
       alert(`${response.data}`);
       if(user.userRole==="admin"){
@@ -39,6 +39,6 @@ export async function loginUser(email, password) {
       }catch(error){
           alert("Error logging user/admin" + error.message);
           return error;
-      }
-    
+      }
+    
 }
