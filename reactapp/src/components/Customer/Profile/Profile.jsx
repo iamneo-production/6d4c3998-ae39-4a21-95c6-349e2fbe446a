@@ -2,7 +2,7 @@ import React, { useEffect,useContext } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import UserContext from "../../../context/UserContext"
 import './Profile.css'
-export default function Profile() {
+function Profile() {
         
     const { userModel,setUserModel } = useContext(UserContext);
     const navigate = useNavigate();
@@ -62,3 +62,5 @@ export default function Profile() {
     </div>
   )
 }
+
+export default Profile;
