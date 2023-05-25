@@ -7,7 +7,7 @@ const UserContext = createContext({
 
 const UserProvider = ({ children }) => {
   const [userModel, setUserModel] = useState(() => {
- 
+    // Retrieve user data from localStorage or set it to null
     const userData = localStorage.getItem("userModel");
     return userData ? JSON.parse(userData) : null;
   });

@@ -1,65 +1,74 @@
-
-.input-style-signup {
-  padding: 10px;
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  min-height: calc(100vh - 40px); 
+  background: radial-gradient(circle at center, #9e62ed, #ff6cb3);
+  background-size: cover;
+  padding: 20px; 
 }
-
 
 .register-form {
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px; 
+  text-align: center;
+  align-items: center; 
+}
+
+.input-style-signup {
+  padding: 14px 10px 10px 12px; 
+  width: 68%; 
+  margin-bottom: 10px; 
   
-}
-
-
-.navbar-register {
-  background-color: #333333;
-  color: white;
-  padding: 10px;
-  max-width: 800px;
-  margin: 0 auto ;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-
-
-@media (max-width: 600px) {
-  
-  .register-form {
-    max-width: 100%;
-    font-size: 14px;
-  }
-
-
-  .navbar-register {
-    font-size: 20px;
-    width: 100%;
-    margin-top: 80px;
-    margin-bottom: 80px;
-  }
-}
-#signinLink {
-  text-decoration: none;
-}
-.loginPara {
-  font-family: 'Times New Roman', Times, serif;
-}
-
-
-.signup-button {
-  padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #c388e1;
-  color: #3c3c3c;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-btn-para {
+  display: inline-flex;
+  justify-content: space-evenly; 
+  margin-bottom: 30px;
+}
+
+.signup-button {
+  order: 1; 
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-top: 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: #000000b4; 
+  color: #ffffff; 
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
+.loginPara {
+  order: 2; 
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  margin-top: 26px;
+}
+
 .signup-button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.navbar-register {
+  color: #7919ef;
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: monospace;
+  padding-top: 30px;
+}
+
+#signinLink {
+  text-decoration: none;
 }

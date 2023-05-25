@@ -5,8 +5,12 @@ import com.examly.springapp.model.UserModel;
 import com.examly.springapp.model.LoginModel;
 import com.examly.springapp.repository.UserModelRepository;
 import com.examly.springapp.repository.AdminModelRepository;
+import com.examly.springapp.model.LoginModel;
+import com.examly.springapp.repository.UserModelRepository;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -19,6 +23,9 @@ public class UserModelService {
 	UserModelRepository userModelRepository;
 	@Autowired
 	AdminModelRepository adminModelRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder ;
 
 	public boolean isUserPresent(LoginModel data) {
 
@@ -46,35 +53,26 @@ public class UserModelService {
 
 	public UserModel saveUser(UserModel userModel) {
 
-
+		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 		return userModelRepository.save(userModel);
 	}
 
 
 	public UserModel saveAdmin(AdminModel adminModel) {
 
-//
-//			UserModel user = new UserModel();
-//			user.setEmail("admin");
-//			user.setPassword("admin");
-//			user.setMobileNumber(userModel.getMobileNumber());
-//			user.setUserRole(userModel.getUserRole());
-//			// default username for admin
-//			userModel.setUsername("admin");
-//
-//
+
 		UserModel admin = new UserModel();
 		admin.setEmail(adminModel.getEmail());
-		admin.setPassword(adminModel.getPassword());
+		admin.setPassword(passwordEncoder.encode(adminModel.getPassword()));
 		admin.setMobileNumber(adminModel.getMobileNumber());
-		admin.setUserRole(admin.getUserRole());
+		admin.setUserRole(adminModel.getUserRole());
 		admin.setUsername("admin");
 		adminModelRepository.save(adminModel);
 		return userModelRepository.save(admin);
 	}
 
 	public String validateUser(LoginModel data) {
-		UserModel user = userModelRepository.findByEmailAndPassword(data.getEmail(),data.getPassword());
+		UserModel user = userModelRepository.findUserByEmail(data.getEmail());
 
 		if (user!=null) {
 			if (user.getUserRole().equals("admin")) {
@@ -105,4 +103,35 @@ public class UserModelService {
   }
 
 
+	public void initCreateDefaultUserAndAdmin(){
+
+		var admin = UserModel.builder()
+				.email("ad@gmail.com")
+				.password(getEncodedPassword("p"))
+				.userRole("admin")
+				.mobileNumber("xxx")
+				.username("xxx")
+				.build();
+		userModelRepository.save(admin);
+
+		var user =  UserModel.builder()
+				.email("u@gmail.com")
+				.password(getEncodedPassword("p"))
+				.userRole("user")
+				.mobileNumber("xxx")
+				.username("xxx")
+				.build();
+		userModelRepository.save(user);
+	}
+
+	public String getEncodedPassword(String pass){
+		return passwordEncoder.encode(pass);
+	}
+
+	public UserModel registerNewUser(UserModel userModel) {
+
+		userModel.setPassword(getEncodedPassword(userModel.getPassword()));
+
+		return userModelRepository.save(userModel);
+	}
 }

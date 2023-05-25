@@ -22,7 +22,16 @@ public class AdminModel {
 
 	String email;
 	String password;
-	
+	String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	String mobileNumber;
 	String userRole;
 	public String getEmail() {
@@ -50,4 +59,3 @@ public class AdminModel {
 		this.userRole = userRole;
 	}
 }
-
