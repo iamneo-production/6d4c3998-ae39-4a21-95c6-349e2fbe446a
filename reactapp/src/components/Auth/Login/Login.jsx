@@ -5,13 +5,13 @@ import "./Login.css";
 import UserContext from "../../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
-import { JwtTokenContext } from "../../../context/TokenContext";
+import { JwtTokenContext } from '../../../context/TokenContext'
 import {createTokenStorage} from "../../../utils/utils"
 
 export default function Login() {
   const navigate = useNavigate();
   const { userModel, setUserModel } = useContext(UserContext);
-  const {setJwtToken} = useContext(JwtTokenContext);
+  const {jwtToken ,setJwtToken} = useContext(JwtTokenContext);
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

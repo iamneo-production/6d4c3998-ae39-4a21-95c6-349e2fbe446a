@@ -20,34 +20,34 @@ function App() {
 
   return (
     <JwtTokenProvider>
-    <UserProvider>
+      <UserProvider>
 
 
-<div className="App">
-  <Routes>
-    {/* PUBLIC ROUTE */}
-    <Route path="/" element={<Login />} />
-    <Route path="/user/signup" element={<Signup />} />
-    <Route path="/user/login" element={<Login />} />
-    <Route path="/admin/login" element={<Login />} />
+        <div className="App">
+          <Routes>
+            {/* PUBLIC ROUTE */}
+            <Route path="/" element={<Login />} />
+            <Route path="/user/signup" element={<Signup />} />
+            <Route path="/user/login" element={<Login />} />
+            <Route path="/admin/login" element={<Login />} />
 
-    {/* USER ROUTES */}
-    {/* This is kinda home page for user */}
-    <Route path="/user/home" element={<UserSharedLayout />} >
-      <Route index element={<ApplyForm />} />
-      <Route path="loanstatus" element={<LoanStatus />} />
-      <Route path="profile" element={<Profile />} />
-    </Route>
+            {/* USER ROUTES */}
+            {/* This is kinda home page for user */}
+            <Route path="/user/home" element={<UserSharedLayout />} >
+              <Route index element={<ApplyForm />} />
+              <Route path="loanstatus" element={<LoanStatus />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
 
-    {/* ADMIN ROUTES */}
-    <Route path="/admin/home" element={<AdminSharedLayout />} >
-      <Route index element={<AdminHomePage />} />
-      <Route path="approvalform" element={<ApprovalForm />} />
-    </Route >
+            {/* ADMIN ROUTES */}
+            <Route path="/admin/home" element={<AdminSharedLayout />} >
+              <Route index element={<AdminHomePage />} />
+              <Route path="approvalform" element={<ApprovalForm />} />
+            </Route >
 
-  </Routes>
-</div>
-</UserProvider>
+          </Routes>
+        </div>
+      </UserProvider>
     </JwtTokenProvider>
 
   );

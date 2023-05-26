@@ -1,7 +1,9 @@
 import React, { createContext, useState } from 'react';
 
 
-export const JwtTokenContext = createContext();
+export const JwtTokenContext = createContext({
+
+});
 
 
 export const  JwtTokenProvider = ({ children }) => {

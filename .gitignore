@@ -1,4 +1,7 @@
 puppeteer/test.js
 node_modules/
+react/
+junit/
+reactapp/node_modules/
 done
 
