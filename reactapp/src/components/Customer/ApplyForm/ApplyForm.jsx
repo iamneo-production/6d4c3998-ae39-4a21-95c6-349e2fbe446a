@@ -125,7 +125,7 @@ export default function ApplyForm() {
               name="next"
               id="next"
               data-testid="next"
-              value="Next" onClick={handleClick}
+              value="Next" 
             />
           </div>
   

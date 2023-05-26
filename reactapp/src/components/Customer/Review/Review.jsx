@@ -9,9 +9,12 @@ function Review() {
   };
 
   return (
+    <>
+    <p data-testid="customerName">Customer Name : </p>
     <form onSubmit={handleSubmit}>
       <label>
         Comments:
+
         <input
           type="text"
           value={comments}
@@ -23,6 +26,7 @@ function Review() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 

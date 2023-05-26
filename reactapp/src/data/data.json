@@ -4,10 +4,12 @@
       "applicantAddress": "xxxx",
       "applicantEmail": "a@gmail.com",
       "applicantPhoneNo": "9014262115",
-      "applicantLoanID": "03251105",
+      "applicantLoanID": "1",
       "applicantAadhar": "xxxx 6",
       "applicantPanNo": "xxxx",
       "applicantSalary": "20000",
+      "applicantLoanamt": "500000",
+      "applicantRepaymentMon": "36",
       "status": "Approved"
     },
     {
@@ -15,10 +17,12 @@
       "applicantAddress": "xxxx",
       "applicantEmail": "a@gmail.com",
       "applicantPhoneNo": "9014262115",
-      "applicantLoanID": "03251104",
+      "applicantLoanID": "2",
       "applicantAadhar": "xxxx 6",
       "applicantPanNo": "xxxx",
       "applicantSalary": "20000",
+      "applicantLoanamt": "500000",
+      "applicantRepaymentMon": "36",
       "status": "Rejected"
     },
     {
@@ -26,10 +30,25 @@
       "applicantAddress": "xxxx",
       "applicantEmail": "a@gmail.com",
       "applicantPhoneNo": "9014262115",
-      "applicantLoanID": "03251104",
+      "applicantLoanID": "3",
       "applicantAadhar": "xxxx 6",
       "applicantPanNo": "xxxx",
       "applicantSalary": "20000",
+      "applicantLoanamt": "500000",
+      "applicantRepaymentMon": "36",
+      "status": "Approved"
+    },
+    {
+      "applicantName": "Akash",
+      "applicantAddress": "xxxx",
+      "applicantEmail": "a@gmail.com",
+      "applicantPhoneNo": "9014262115",
+      "applicantLoanID": "2",
+      "applicantAadhar": "xxxx 6",
+      "applicantPanNo": "xxxx",
+      "applicantSalary": "25000",
+      "applicantLoanamt": "100000",
+      "applicantRepaymentMon": "12",
       "status": "Approved"
     }
   ]
