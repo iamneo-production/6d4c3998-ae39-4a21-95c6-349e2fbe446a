@@ -50,10 +50,7 @@ export default function Login() {
         }
       }catch(error){
         alert("Error logging user/admin"+error.message);
-      }
-
-
-      
+      }
     }
 
   }
