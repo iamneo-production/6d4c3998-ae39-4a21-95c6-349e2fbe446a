@@ -8,7 +8,6 @@ export async function signUpUser(
   password,
   userType,
   userName,
-  setLoading
 ) {
   try {
  
@@ -28,7 +27,7 @@ export async function signUpUser(
     console.log(res.status);
     if (!res.ok) {
 
-      //alert("Signup failed",res.status);
+      alert("Signup failed",res.status);
       throw new Error("Signup failed");
     }
 

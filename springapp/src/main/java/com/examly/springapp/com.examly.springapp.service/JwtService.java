@@ -1,10 +1,10 @@
-package com.example.reacts.Service;
+package com.examly.springapp.service;
 
 
-import com.example.reacts.Model.*;
-import com.example.reacts.Repository.UserModelRepository;
+import com.examly.springapp.model.*;
+import com.examly.springapp.repository.UserModelRepository;
 
-import com.example.reacts.util.JwtUtil;
+import com.examly.springapp.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,4 +1,4 @@
-package com.example.reacts.Controller;
+package com.examly.springapp.controller;
 
 public class MessageResponse {
     private String message;

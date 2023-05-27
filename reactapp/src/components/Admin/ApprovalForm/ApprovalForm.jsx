@@ -1,8 +1,8 @@
 import React from "react";
 import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
 import "./ApprovalForm.css";
-import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
+// import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
+// import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import approvaldata from "../../../data/approvaldata.json";
 import {useNavigate,useParams} from "react-router-dom";
 
@@ -38,12 +38,12 @@ function ApprovalForm() {
               <div className="icon-container">
                 <button type="submit" id="editLoan" onClick={()=>handleEdit(application.applicantLoanID)}>
                 <i title="Edit Loan">
-                  <EditTwoToneIcon />
+                  {/* <EditTwoToneIcon /> */}
                 </i>
                 </button>
                 <button type="submit" id="deleteLoan" onClick={()=>handleDelete(application.applicantLoanID)}>
                 <i title="Delete Loan">
-                  <DeleteOutlineTwoToneIcon />
+                  {/* <DeleteOutlineTwoToneIcon /> */}
                 </i>
                 </button>
               </div>
