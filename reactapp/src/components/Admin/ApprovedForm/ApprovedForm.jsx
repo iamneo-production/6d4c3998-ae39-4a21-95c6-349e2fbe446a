@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
 import data from "../../../data/data.json";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./ApprovedForm.css";
+import { useNavigate , useParams } from "react-router-dom";
 
 function ApprovedForm() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLoans, setFilteredLoans] = useState(data);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -16,11 +18,18 @@ function ApprovedForm() {
     e.preventDefault();
     setSearchQuery("");
 
-    const filteredData = data.filter((application) =>
-      application.applicantLoanID.includes(searchQuery)
+    const filteredData = data.filter(
+      (application) =>
+        application.applicantLoanID.includes(searchQuery) ||
+        application.status.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredLoans(filteredData);
   };
+
+  // const handleGenerateRepayment = () => {
+  //   navigate('/admin/generateSchedule');
+  // }
+
 
   return (
     <>
@@ -29,7 +38,7 @@ function ApprovedForm() {
         <input
           type="text"
           className="search-input"
-          placeholder="Enter Loan ID to Search..."
+          placeholder="Enter Loan ID or Status to Search..."
           value={searchQuery}
           onChange={handleInputChange}
         />
@@ -48,17 +57,24 @@ function ApprovedForm() {
           }
           key={index}
         >
-          <p>Applicant Name: {application.applicantName}</p>
-          <p>Applicant Address: {application.applicantAddress}</p>
-          <p>Applicant Email: {application.applicantEmail}</p>
-          <p>Applicant Phone No: {application.applicantPhoneNo}</p>
-          <p>Applicant Loan ID: {application.applicantLoanID}</p>
-          <p>Applicant Aadhar: {application.applicantAadhar}</p>
-          <p>Applicant PAN No: {application.applicantPanNo}</p>
-          <p>Applicant Salary: {application.applicantSalary}</p>
+          <p> Name: {application.applicantName}</p>
+          <p>Email: {application.applicantEmail}</p>
+          <p>Phone No: {application.applicantPhoneNo}</p>
+          <p>Aadhar: {application.applicantAadhar}</p>
+          <p>PAN No: {application.applicantPanNo}</p>
+          <p>Salary: {application.applicantSalary}</p>
+          <p>Loan Applied : {application.applicantLoanamt}</p>
+          <p>Repayment Mon : {application.applicantRepaymentMon}</p>
           <button disabled>
             {application.status === "Approved" ? "Approved" : "Rejected"}
           </button>
+          {/* {application.status === "Approved" && (
+            
+              <button type="submit" id="generateShedule" onClick={()=>handleGenerateRepayment()}>
+                Generate Repayment Schedule
+              </button>
+            
+          )} */}
         </div>
       ))}
     </>

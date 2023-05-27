@@ -1,44 +1,76 @@
-import axios from "axios";
+import { toast } from "react-toastify";
+import { BASE_URL } from "./utils";
 
-
-export async function signUpUser(email, mobileNumber, password, userType, userName) {
-    const user = {
-      "email":email,
-      "mobileNumber":mobileNumber,
-      "password":password,
-      "userRole":userType,
-      "username":userName
-    };
-  
-    try {
-      const response = await axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/signup", user);
-      console.log(response.status,"response data is :",response.data);
-      console.log("userRole is :",response.data.userRole);
-      alert(`${response.data}`);
-      if(user.userRole==="admin"){
-        window.location.href = "/admin/login";
-      }else {
-        window.location.href = "/user/login";
-      }
-      return response.data; 
-    } catch (error) {
-      alert("Error registering user/admin"+error.message);
-      
+const toastMsg = (msg) => toast(msg);
+export async function signUpUser(
+  email,
+  mobileNumber,
+  password,
+  userType,
+  userName,
+  setLoading
+) {
+  try {
+    setLoading(true)
+    const res = await fetch(`${BASE_URL}/user/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        mobileNumber: mobileNumber,
+        password: password,
+        userRole: userType,
+        username: userName,
+      }),
+    });
+    console.log(res.status);
+    if (!res.ok) {
+      setLoading(false)
+      //alert("Signup failed",res.status);
+      throw new Error("Signup failed");
     }
-  }
 
-export async function loginUser(email, password) {
-    const user = {
-        "email": email,
-        "password": password
-      };
-      try{
-        const response = await  axios.post("https://8080-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/user/login", user)
-        
-        return response;
-      }catch(error){
-          alert("Error logging user/admin" + error.message);
-          return error;
-      }
-    
+    const data = await res.json();
+   console.log(data)
+    if (userType === "admin") {
+      window.location.href = "/admin/login";
+    } else {
+      window.location.href = "/user/login";
+    }
+    return;
+  } catch (error) {
+    setLoading(false)
+    toastMsg("Error registering user/admin " + error.message);
+    throw error;
+  }
+}
+
+export async function loginUser(email, password,setLoading) {
+
+  try {
+    const res = await fetch(`${BASE_URL}/user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,                                         
+        password: password,
+      }),
+    });                 
+    console.log("status is: ",res.status)
+    if (!res.ok) {
+      setLoading(false)
+      if(res.status===401) throw new Error(`${res.status} Invalid Credentials`);
+      else throw new Error(`${res.status} Error`)
+    }
+
+    return res;
+  } catch (error) {
+    setLoading(false)
+    toastMsg(error.message);
+    return error;
+  }
 }
