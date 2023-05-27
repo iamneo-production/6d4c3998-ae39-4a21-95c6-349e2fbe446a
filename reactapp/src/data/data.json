@@ -1,0 +1,36 @@
+[
+    {
+      "applicantName": "Arul",
+      "applicantAddress": "xxxx",
+      "applicantEmail": "a@gmail.com",
+      "applicantPhoneNo": "9014262115",
+      "applicantLoanID": "03251105",
+      "applicantAadhar": "xxxx 6",
+      "applicantPanNo": "xxxx",
+      "applicantSalary": "20000",
+      "status": "Approved"
+    },
+    {
+      "applicantName": "Akash",
+      "applicantAddress": "xxxx",
+      "applicantEmail": "a@gmail.com",
+      "applicantPhoneNo": "9014262115",
+      "applicantLoanID": "03251104",
+      "applicantAadhar": "xxxx 6",
+      "applicantPanNo": "xxxx",
+      "applicantSalary": "20000",
+      "status": "Rejected"
+    },
+    {
+      "applicantName": "Akash",
+      "applicantAddress": "xxxx",
+      "applicantEmail": "a@gmail.com",
+      "applicantPhoneNo": "9014262115",
+      "applicantLoanID": "03251104",
+      "applicantAadhar": "xxxx 6",
+      "applicantPanNo": "xxxx",
+      "applicantSalary": "20000",
+      "status": "Approved"
+    }
+  ]
+  
