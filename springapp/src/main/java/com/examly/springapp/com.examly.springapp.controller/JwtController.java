@@ -1,11 +1,11 @@
-package com.example.reacts.Controller;
+package com.examly.springapp.controller;
 
 
-import com.example.reacts.Model.JwtRequest;
-import com.example.reacts.Model.JwtResponse;
-import com.example.reacts.Model.LoginModel;
-import com.example.reacts.Model.LoginResponseModel;
-import com.example.reacts.Service.JwtService;
+import com.examly.springapp.model.JwtRequest;
+import com.examly.springapp.model.JwtResponse;
+import com.examly.springapp.model.LoginModel;
+import com.examly.springapp.model.LoginResponseModel;
+import com.examly.springapp.service.JwtService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -62,7 +62,7 @@ export default function Signup() {
           name="user"
           id="user"
           placeholder="Enter admin/user"
-          value='user'
+          value={userType}
           onChange={(e) => {
             setAdminOrUser(e.target.value);
           }}
