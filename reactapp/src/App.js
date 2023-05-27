@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import Login from "./components/Auth/Login/Login";
 import Signup from "./components/Auth/Signup/Signup";
 import { UserProvider } from "./context/UserContext";
@@ -21,7 +21,7 @@ function App() {
     <JwtTokenProvider>
       <UserProvider>
         <div className="App">
-          <ToastContainer />
+      
           <Routes>
             {/* PUBLIC ROUTE */}
             <Route path="/" element={<Login />} />

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+
 import UserContext from "../../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
@@ -10,8 +9,7 @@ import { JwtTokenContext } from "../../../context/TokenContext";
 import {createTokenStorage} from "../../../utils/utils"
 
 export default function Login() {
-  // TOAST //
-  const loginToast = (msg) => toast(msg);
+
 
   const navigate = useNavigate();
   const { userModel, setUserModel } = useContext(UserContext);
@@ -19,7 +17,7 @@ export default function Login() {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
+
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -28,20 +26,18 @@ export default function Login() {
 
   async function handleLogin() {
     if (email === "" || password === "") {
-      loginToast("Enter all fields")
+   
       console.log("Enter all fields");
     } else if (!emailRegex.test(email)) {
-      loginToast("Invalid Email");
+   
       console.log("Invalid Email");
       return;
     } else if (!passwordRegex.test(password)) {
-      loginToast(
-        "Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!"
-      );
+     
       return;
     } else {
-      setLoading(true)
-      const response = await loginUser(email, password,setLoading);
+      
+      const response = await loginUser(email, password);
 
       const data =await response.json();
       console.log("userModel is :",data.userModel)
@@ -49,7 +45,7 @@ export default function Login() {
      
       
      if(data.success ===true){
-      setLoading(false)
+    
       if (data.userModel.userRole === "user") {
         console.log(data.token)
         setJwtToken(data.token)
@@ -67,8 +63,8 @@ export default function Login() {
      }
       
       else if(data.success === false) {
-        setLoading(false)
-        loginToast("Invalid email or password");
+ 
+ 
         console.log("Invalid email or password");
       }
 
@@ -79,7 +75,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h1 className="login-title">{loading?"Loging...!":'Login'}</h1>
+        <h1 className="login-title">Login</h1>
         <div data-testid="loginBox" className="loginBox">
           <div>
             <input
