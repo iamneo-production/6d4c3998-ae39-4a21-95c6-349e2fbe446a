@@ -1,7 +1,7 @@
-import { toast } from "react-toastify";
+
 import { BASE_URL } from "./utils";
 
-const toastMsg = (msg) => toast(msg);
+
 export async function signUpUser(
   email,
   mobileNumber,
@@ -11,7 +11,7 @@ export async function signUpUser(
   setLoading
 ) {
   try {
-    setLoading(true)
+ 
     const res = await fetch(`${BASE_URL}/user/signup`, {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@ export async function signUpUser(
     });
     console.log(res.status);
     if (!res.ok) {
-      setLoading(false)
+
       //alert("Signup failed",res.status);
       throw new Error("Signup failed");
     }
@@ -41,8 +41,8 @@ export async function signUpUser(
     }
     return;
   } catch (error) {
-    setLoading(false)
-    toastMsg("Error registering user/admin " + error.message);
+
+
     throw error;
   }
 }
@@ -62,15 +62,14 @@ export async function loginUser(email, password,setLoading) {
     });                 
     console.log("status is: ",res.status)
     if (!res.ok) {
-      setLoading(false)
+      
       if(res.status===401) throw new Error(`${res.status} Invalid Credentials`);
       else throw new Error(`${res.status} Error`)
     }
 
     return res;
   } catch (error) {
-    setLoading(false)
-    toastMsg(error.message);
+ 
     return error;
   }
 }

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {Link } from "react-router-dom";
 import {signUpUser,loginUser} from "../../../utils/userApi"
-import  {toast} from 'react-toastify'
+
 import './Signup.css'
 
 export default function Signup() {
-  const toastMsg = (msg) => toast(msg);
   const [userType, setAdminOrUser] = useState("");
   
   const [email, setEmail] = useState("");
@@ -24,39 +23,36 @@ export default function Signup() {
 
  async  function handleSignup(){
     if(userType==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
-      toastMsg("Please enter all fields")
+      
       console.log("Please enter all details")
     }
     else if(!emailRegex.test(email)){
       
       console.log("Invalid Email");
-      toastMsg("Invalid Email");
+     
       return;
     }
     else if(!passwordRegex.test(password)){  
-      toastMsg("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
       return;
     }
     else if(password!==confirmPassword){
-      toastMsg("Passwords does not match")
-      return;
+     return;
     }
     else if(!mobileNumberRegex.test(mobileNumber)){
       console.log("Invalid mobile number");
-      toastMsg("Invalid Mobile no.");
-      return;
+     return;
     }
     else{
 
-      const response= await signUpUser(email,mobileNumber,password,userType,userName,setLoading)
+      const response= await signUpUser(email,mobileNumber,password,userType,userName)
      
     }
   }
   return (
     <div className="register-container">
     <div className="register-form">
-      <h1 className="navbar-register"> {loading?"Processing" : "Register"} </h1>
+      <h1 className="navbar-register"> Register </h1>
   
    
         <input
