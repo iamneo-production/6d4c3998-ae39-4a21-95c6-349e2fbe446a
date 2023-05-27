@@ -1,7 +1,7 @@
 import React, { useEffect,useContext } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import UserContext from '../../../context/UserContext'
-
+import "./style.css";
 
 export default function LoanStatus() {
   const { userModel,setUserModel } = useContext(UserContext);
@@ -21,10 +21,16 @@ export default function LoanStatus() {
     <div>
       <h1>Loan status</h1>
       {userModel && (
-        <div>
-          <p>User email: {userModel.email}</p>
-          <p>Your role: {userModel.userRole}</p>
+        <form>
+        <div className="form-group">
+          <label for="enterLoan">Track Your Loan Application</label>
+          <br></br><br></br>
+          <input type="text" className="enterLoanId"  placeholder="Enter your Loan id"/>
+          <br>
+          </br><br></br>
+          <button type="button" className="trackButton">Track</button>
         </div>
+        </form>
       )}
     </div>
   )
