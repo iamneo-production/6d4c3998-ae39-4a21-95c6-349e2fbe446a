@@ -1,24 +1,41 @@
-package com.examly.springapp;
+package com.examly.springapp.controller;
 
-import com.examly.springapp.model.AdminModel;
-import com.examly.springapp.model.LoginModel;
-import com.examly.springapp.model.LoginResponseModel;
-import com.examly.springapp.model.UserModel;
+import com.examly.springapp.model.*;
 
+import com.examly.springapp.service.JwtService;
 import com.examly.springapp.service.UserModelService;
+import com.examly.springapp.service.UserProfileService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import javax.annotation.PostConstruct;
+import java.util.Random;
+
+
+@CrossOrigin
 @RestController
 public class AuthController {
 
     @Autowired
+    private JwtService jwtService ;
+
+    @Autowired
     UserModelService userModelService;
+
+    @Autowired
+    UserProfileService userProfileService;
+
+    // CREATE DEFAUT USERS //
+//    @PostConstruct
+//    public void initDefaultUsers(){
+//        userModelService.initCreateDefaultUserAndAdmin();
+//    }
 
     @PostMapping("/user/present")
     boolean isUserPresent(@RequestBody  LoginModel data){
@@ -30,19 +47,27 @@ public class AuthController {
         return userModelService.isAdminPresent(data);
     }
 
+
+
+
     //      WORKING  FINE //
     @PostMapping("/user/signup")
     public ResponseEntity <?> saveUser(@RequestBody UserModel userModel) {
 
         if(userModelService.userAldreadyExist(userModel.getEmail())){
-            return  new ResponseEntity<>("User Aldredy exist in db go login",HttpStatus.CONFLICT);
+            return  new ResponseEntity<>("User Already exist in db go login",HttpStatus.CONFLICT);
         }
 
          UserModel savedUser = userModelService.saveUser(userModel);
         if (savedUser != null) {
-            String role = savedUser.getUserRole();
-            String message = role.equals("admin") ? "Admin added" : "User added";
-            return  ResponseEntity.ok(message);
+
+            UserProfileModel userProfile = new UserProfileModel(savedUser.getId(), savedUser.getId(), savedUser.getEmail(),savedUser.getPassword(),savedUser.getUsername(),savedUser.getMobileNumber(),savedUser.getUserRole(),0,"",0);
+            UserProfileModel savedUserProfile =  userProfileService.saveProfile(userProfile);
+           // System.out.println("userProfile :"+ savedUserProfile.getEmail()+savedUserProfile.getPassword());
+
+             String role = savedUser.getUserRole();
+             String message = role.equals("admin") ? "Admin added" : "User added";
+            return  ResponseEntity.ok(new MessageResponse(message));
         } else {
             return new ResponseEntity<>("Failed to register user.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -51,16 +76,24 @@ public class AuthController {
 
     // WORKING FINE //
     @PostMapping("/admin/signup")
-    public ResponseEntity <String> saveAdmin(@RequestBody AdminModel adminModel){
+    public ResponseEntity <?> saveAdmin(@RequestBody AdminModel adminModel){
 
         if(userModelService.userAldreadyExist(adminModel.getEmail())){
-            return  new ResponseEntity<>("Admin Aldredy exist in db go login",HttpStatus.CONFLICT);
+            return  new ResponseEntity<>("User Already exist in db go login",HttpStatus.CONFLICT);
         }
-        UserModel savedAdmin = userModelService.saveAdmin(adminModel);
-        if (savedAdmin != null) {
-            return new ResponseEntity<>("Admin added", HttpStatus.CREATED);
+
+        UserModel savedUser = userModelService.saveAdmin(adminModel);
+        System.out.println("admin saved");
+        if (savedUser != null) {
+
+            UserProfileModel userProfile = new UserProfileModel(savedUser.getId(), savedUser.getId(), savedUser.getEmail(),savedUser.getPassword(),savedUser.getUsername(),savedUser.getMobileNumber(),savedUser.getUserRole(),0,"",0);
+            UserProfileModel savedUserProfile =  userProfileService.saveProfile(userProfile);
+            System.out.println("profile created too");
+            String role = savedUser.getUserRole();
+            String message = role.equals("admin") ? "Admin added" : "User added";
+            return  ResponseEntity.ok(new MessageResponse(message));
         } else {
-            return new ResponseEntity<>("Failed to register admin.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Failed to register user.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -68,24 +101,33 @@ public class AuthController {
 
     @PostMapping("/user/login")
     @ResponseBody
-    public LoginResponseModel loginUser(@RequestBody LoginModel data) {
+    public ResponseEntity <?> loginUser(@RequestBody LoginModel data) throws Exception {
+
         String redirectUrl = userModelService.validateUser(data);
         if (redirectUrl.contains("error")) {
-            return new LoginResponseModel(null, false);
+
+            return new ResponseEntity<>("login failed",HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
+            LoginResponseModel loginResponseModel =jwtService.createJwtToken(data);
+
             UserModel userModel = userModelService.findUserByEmail(data.getEmail());
-            return new LoginResponseModel(userModel, true);
+            System.out.println(userModel);
+            return  ResponseEntity.ok(loginResponseModel);
         }
     }
     @PostMapping("/")
     @ResponseBody
-    public LoginResponseModel loginUserFromHome(@RequestBody LoginModel data) {
+    public LoginResponseModel login(@RequestBody LoginModel data) throws Exception {
+
         String redirectUrl = userModelService.validateUser(data);
         if (redirectUrl.contains("error")) {
-            return new LoginResponseModel(null, false);
+            return new LoginResponseModel(null, false,"Invalid credentials could not generate token");
         } else {
+            LoginResponseModel loginResponseModel =jwtService.createJwtToken(data);
+
             UserModel userModel = userModelService.findUserByEmail(data.getEmail());
-            return new LoginResponseModel(userModel, true);
+            System.out.println(userModel);
+            return loginResponseModel;
         }
     }
 
@@ -105,14 +147,28 @@ public class AuthController {
     // NOT WORKING TEST //
     @PostMapping("/admin/login")
     @ResponseBody
-    public boolean loginAdmin(@RequestBody LoginModel data) {
-        String redirectUrl = userModelService.validateAdmin(data);
+    public ResponseEntity<? > loginAdmin(@RequestBody LoginModel data) throws Exception {
+        String redirectUrl = userModelService.validateUser(data);
         if (redirectUrl.contains("error")) {
-            return false;
+
+            return new ResponseEntity<>("login failed",HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
-            return true;
+            LoginResponseModel loginResponseModel =jwtService.createJwtToken(data);
+
+            UserModel userModel = userModelService.findUserByEmail(data.getEmail());
+            System.out.println(userModel);
+            return  ResponseEntity.ok(loginResponseModel);
         }
     }
-
+//    @GetMapping("/forAdmin")
+//    @PreAuthorize("hasRole('admin')")
+//    public String forAdmin(){
+//        return "this is for admin only : kuse get" ;
+//    }
+//
+//    @GetMapping("/forUser")
+//    @PreAuthorize("hasRole('user')")
+//    public String forUser(){
+//        return "this is for user only: use get" ;
+//    }
 }
-
