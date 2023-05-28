@@ -1,16 +1,13 @@
-
 import { BASE_URL } from "./utils";
-
 
 export async function signUpUser(
   email,
   mobileNumber,
   password,
   userType,
-  userName,
+  userName
 ) {
   try {
- 
     const res = await fetch(`${BASE_URL}/user/signup`, {
       method: "POST",
       headers: {
@@ -26,13 +23,11 @@ export async function signUpUser(
     });
     console.log(res.status);
     if (!res.ok) {
-
-      alert("Signup failed",res.status);
       throw new Error("Signup failed");
     }
 
     const data = await res.json();
-   console.log(data)
+    console.log(data);
     if (userType === "admin") {
       window.location.href = "/admin/login";
     } else {
@@ -40,14 +35,11 @@ export async function signUpUser(
     }
     return;
   } catch (error) {
-
-
-    throw error;
+    alert(`${error.message}`, error.status);
   }
 }
 
-export async function loginUser(email, password,setLoading) {
-
+export async function loginUser(email, password, setLoading) {
   try {
     const res = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
@@ -55,20 +47,19 @@ export async function loginUser(email, password,setLoading) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,                                         
+        email: email,
         password: password,
       }),
-    });                 
-    console.log("status is: ",res.status)
+    });
+    console.log("status is: ", res.status);
     if (!res.ok) {
-      
-      if(res.status===401) throw new Error(`${res.status} Invalid Credentials`);
-      else throw new Error(`${res.status} Error`)
+      if (res.status === 401)
+        throw new Error(`${res.status} Invalid Credentials`);
+      else throw new Error(`${res.status} Error`);
     }
 
     return res;
   } catch (error) {
- 
     return error;
   }
 }

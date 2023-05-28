@@ -20,8 +20,7 @@ function Profile() {
   
   return (
      <div>
-      <h1> Customer Profile </h1>
-      {userModel ? (
+     
         <div className="profile-container">
         <h2>Profile Information</h2>
         <form className="profile-form">
@@ -56,9 +55,7 @@ function Profile() {
           </div>
         </form>
       </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      
     </div>
   )
 }

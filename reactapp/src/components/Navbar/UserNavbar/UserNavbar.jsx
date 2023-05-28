@@ -18,15 +18,16 @@ function Navigationbar(){
             <Link className='logout'>Log out</Link>
             <div className="tabs">
                 <ul>
-                    <li onClick={() => {navigate('/ApplyForm');handleTabClick(1);}} className={activeTab === 1 ? 'active' : ''}>Apply Loan</li>
-                    <li onClick={() => {navigate('/LoanStatus');handleTabClick(2);}} className={activeTab === 2 ? 'active' : ''}>Loan Status</li>
-                    <li onClick={() => {navigate('/Profile');handleTabClick(3);}} className={activeTab === 3 ? 'active' : ''}>Profile</li>
+                    <li onClick={() => {navigate('/user/home');handleTabClick(1);}} className={activeTab === 1 ? 'active' : ''}>Apply Loan</li>
+                    <li onClick={() => {navigate('/user/home/loanstatus');handleTabClick(2);}} className={activeTab === 2 ? 'active' : ''}>Loan Status</li>
+                    <li onClick={() => {navigate('/user/home/profile');handleTabClick(3);}} className={activeTab === 3 ? 'active' : ''}>Profile</li>
                 </ul>
             </div>
            
         </div>
         
-        </>
+        </>
+
     );
 }
 

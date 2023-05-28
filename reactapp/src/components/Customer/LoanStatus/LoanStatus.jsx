@@ -22,7 +22,7 @@ export default function LoanStatus() {
       <h1>Loan status</h1>
       {userModel && (
         <form>
-        <div className="form-group">
+        <div className="form-groupp">
           <label for="enterLoan">Track Your Loan Application</label>
           <br></br><br></br>
           <input type="text" className="enterLoanId"  placeholder="Enter your Loan id"/>

@@ -1,63 +1,62 @@
 *{
-    margin: 5px;
-    
+  margin: 5px;
+  
 }
 .main{
-    background-color: rgb(0, 0, 138);
-    color: white;
-    
-  }
+  background-color: rgb(0, 0, 138);
+  color: white;
+  
+}
 
-  .main .logout{
-    position: absolute;
-    top: 35px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: transform 0.2s ease-out;
-    color:white;
-    text-decoration: none;
-  }
-  
-  .main a:hover{
-    transform: scale(0.8);
-  
-  }
-  h1{
-    margin-left: 10px;
-  }
-  
-  
-  ul{
-    list-style-type: none;
-  }
-  .tabs ul li{
-      display: inline;
-      text-align: center;
-      font-size: 25px;
-      margin: 30px;
-      cursor: pointer;
-      color: white;
-   
-      transition: transform 0.2s ease-out;
-  }
-  .tabs ul li.active{
-    font-size: 20px;
-    
-  }
-  .tabs ul li:hover {
-    background-color: #929090;
-    
-  }
-  .tabs{
+.main .logout{
+  position: absolute;
+  top: 55px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  color:white;
+  text-decoration: none;
+}
+
+.main a:hover{
+  transform: scale(0.8);
+
+}
+h1{
+  margin-left: 10px;
+}
+
+
+ul{
+  list-style-type: none;
+}
+.tabs ul li{
+    display: inline;
     text-align: center;
-    
-  }
+    font-size: 25px;
+    margin: 30px;
+    cursor: pointer;
+    color: white;
+ 
+    transition: transform 0.2s ease-out;
+}
+.tabs ul li.active{
+  font-size: 20px;
   
-  @media screen and (max-width: 600px) {
-    .tabs ul li {
-      font-size: 1.2em;
-      margin: 10px;
-    }
-   
+}
+.tabs ul li:hover {
+  background-color: #929090;
+  
+}
+.tabs{
+  text-align: center;
+  
+}
+
+@media screen and (max-width: 600px) {
+  .tabs ul li {
+    font-size: 1.2em;
+    margin: 10px;
   }
+}
