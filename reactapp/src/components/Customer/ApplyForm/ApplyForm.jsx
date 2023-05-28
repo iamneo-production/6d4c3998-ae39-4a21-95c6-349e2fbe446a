@@ -215,3 +215,33 @@ export default function ApplyForm() {
     </div>
   );
 }
+function DocumentComponent({ addLoan }) {
+  return (
+    <>
+      {/* Document part  */}
+      <div className="form-group card1">
+        <label for="selectDocumentType">Upload documents(Mandatory *)</label>
+        <br></br>
+        <select
+          className="input-form"
+          name="selectDocumentType"
+          id="selectDocumentType"
+        >
+          <option value="pdf">pdf</option>
+          <option value="jpg">jpg</option>
+          <option value="png">png</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <p>Images oŕ Documents(Upload below 2mb)</p>
+        <input className="input-form" type="file" id="chooseFile" />
+        <br></br>
+        <button type="submit" id="uploadDocumentButton">
+          Upload Documents
+        </button>
+      </div>
+      <button onClick={addLoan} id="applyLoan">Apply loan</button>
+    </>
+  );
+}
