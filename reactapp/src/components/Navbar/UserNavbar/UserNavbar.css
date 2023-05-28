@@ -1,63 +1,118 @@
-*{
-    margin: 5px;
-    
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 10px;
+  animation: fade-in 0.5s ease-in;
 }
-.main{
-    background-color: rgb(0, 0, 138);
-    color: white;
-    
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+  margin: 0;
+}
+
+.logout {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tabs {
+  margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+li.active {
+  color: #00e6ff;
+  border-bottom: 2px solid #00e6ff;
+}
+
+li:hover {
+  color: #00e6ff;
+}
+
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.menu-line {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+}
+
+@media (max-width: 600px) {
+  .main {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .main .logout{
-    position: absolute;
-    top: 35px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: transform 0.2s ease-out;
-    color:white;
-    text-decoration: none;
+  ul {
+    margin-top: 10px;
   }
-  
-  .main a:hover{
-    transform: scale(0.8);
-  
+
+  li {
+    padding: 5px;
+    margin-right: 5px;
+    font-size: 14px;
   }
-  h1{
-    margin-left: 10px;
+
+  .menu-icon {
+    display: flex;
   }
-  
-  
-  ul{
-    list-style-type: none;
+
+  .tabs {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: black;
+    padding: 10px;
   }
-  .tabs ul li{
-      display: inline;
-      text-align: center;
-      font-size: 25px;
-      margin: 30px;
-      cursor: pointer;
-      color: white;
-   
-      transition: transform 0.2s ease-out;
+
+  .tabs.open {
+    display: flex;
   }
-  .tabs ul li.active{
-    font-size: 20px;
-    
+
+  .tabs ul {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
   }
-  .tabs ul li:hover {
-    background-color: #929090;
-    
+
+  .tabs li {
+    margin: 5px 0;
   }
-  .tabs{
-    text-align: center;
-    
-  }
-  
-  @media screen and (max-width: 600px) {
-    .tabs ul li {
-      font-size: 1.2em;
-      margin: 10px;
-    }
-   
-  }
+}
