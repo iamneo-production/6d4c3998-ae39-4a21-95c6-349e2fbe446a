@@ -33,6 +33,8 @@ export async function signUpUser(
 
     const data = await res.json();
    console.log(data)
+   localStorage.setItem('email', email);
+   localStorage.setItem('password', password);
     if (userType === "admin") {
       window.location.href = "/admin/login";
     } else {
@@ -41,8 +43,8 @@ export async function signUpUser(
     return;
   } catch (error) {
 
-
-    throw error;
+    console.log(error)
+   
   }
 }
 
@@ -68,7 +70,7 @@ export async function loginUser(email, password,setLoading) {
 
     return res;
   } catch (error) {
- 
-    return error;
+    alert(error.message)
+    return
   }
 }

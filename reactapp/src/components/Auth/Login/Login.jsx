@@ -6,18 +6,17 @@ import UserContext from "../../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
 import { JwtTokenContext } from "../../../context/TokenContext";
-import {createTokenStorage} from "../../../utils/utils"
+import { createTokenStorage } from "../../../utils/utils";
 
 export default function Login() {
-
-
+  const lemail = localStorage.getItem("email");
+  const lpassword = localStorage.getItem("password");
   const navigate = useNavigate();
   const { userModel, setUserModel } = useContext(UserContext);
-  const {setJwtToken} = useContext(JwtTokenContext);
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { setJwtToken } = useContext(JwtTokenContext);
 
+  const [email, setEmail] = useState(lemail);
+  const [password, setPassword] = useState(lpassword);
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -26,49 +25,43 @@ export default function Login() {
 
   async function handleLogin() {
     if (email === "" || password === "") {
-   
       console.log("Enter all fields");
     } else if (!emailRegex.test(email)) {
-   
       console.log("Invalid Email");
       return;
     } else if (!passwordRegex.test(password)) {
-     
       return;
     } else {
-      
-      const response = await loginUser(email, password);
+      try {
+        const response = await loginUser(email, password);
 
-      const data =await response.json();
-      console.log("userModel is :",data.userModel)
-      console.log("login :",data.success)
-     
-      
-     if(data.success ===true){
-    
-      if (data.userModel.userRole === "user") {
-        console.log(data.token)
-        setJwtToken(data.token)
-        setUserModel(data.userModel);
-        createTokenStorage(data.token)
-        navigate("/user/home");
-      } else if(data.userModel.userRole === "admin"){
-        console.log(data.token)
-        setJwtToken(data.token)
-        setUserModel(data.userModel);
-        createTokenStorage(data.token)
-        navigate("/admin/home");
+        if (!response.ok) throw Error("Error loging");
+        const data = await response.json();
+
+        if (data.success === true) {
+          if (data.userModel.userRole === "user") {
+            console.log(data.token);
+            setJwtToken(data.token);
+            setUserModel(data.userModel);
+            createTokenStorage(data.token);
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+            navigate("/user/home");
+          } else if (data.userModel.userRole === "admin") {
+            console.log(data.token);
+            setJwtToken(data.token);
+            setUserModel(data.userModel);
+            createTokenStorage(data.token);
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+            navigate("/admin/home");
+          }
+        } else if (data.success === false) {
+          console.log("Invalid email or password");
+        }
+      } catch (e) {
+        console.log(e);
       }
-      
-     }
-      
-      else if(data.success === false) {
- 
- 
-        console.log("Invalid email or password");
-      }
-
-
     }
   }
 
@@ -82,6 +75,7 @@ export default function Login() {
               className="input-style-login"
               data-testid="email"
               type="email"
+              value={email}
               name="email"
               id="email"
               placeholder="Enter email"
@@ -96,6 +90,7 @@ export default function Login() {
               data-testid="password"
               type="password"
               name="password"
+              value={password}
               id="password"
               placeholder="Enter Password"
               onChange={(e) => {
@@ -116,7 +111,7 @@ export default function Login() {
             />
             <p className="loginPara">
               &nbsp; New user/admin
-              <Link data-testid="signupLink" id="signupLink"  to="/user/signup">
+              <Link data-testid="signupLink" id="signupLink" to="/user/signup">
                 &nbsp; Signup
               </Link>
             </p>
