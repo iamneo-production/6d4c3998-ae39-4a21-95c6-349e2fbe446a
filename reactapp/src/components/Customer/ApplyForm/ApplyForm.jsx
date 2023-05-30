@@ -16,7 +16,7 @@ export default function ApplyForm() {
     applicantAadhaar: "",
     applicantPan: "",
     applicantSalary: "",
-    applicantAddress: "Ban",
+    applicantAddress: "",
     loanAmountRequired: "",
     loanRepaymentMonths: "",
   });
