@@ -13,7 +13,7 @@ function AdminNavbar() {
 
   function handleLogout() {
     setUserModel(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("jwtToken");
     localStorage.removeItem("userModel");
     navigate("/user/login");
   }
