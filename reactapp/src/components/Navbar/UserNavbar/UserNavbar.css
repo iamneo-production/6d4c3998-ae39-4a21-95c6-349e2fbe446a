@@ -11,6 +11,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -26,6 +27,7 @@ h1 {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .tabs {

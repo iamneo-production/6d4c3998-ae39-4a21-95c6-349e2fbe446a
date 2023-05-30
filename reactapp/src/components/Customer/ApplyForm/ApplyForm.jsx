@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../../context/UserContext";
 import UserNavbar from "../../Navbar/UserNavbar/UserNavbar";
 import { BASE_URL } from "../../../utils/utils";
+import DocumentComponent from './DocumentComponent'
 import "./ApplyForm.css";
 
 export default function ApplyForm() {
@@ -20,6 +21,8 @@ export default function ApplyForm() {
     loanRepaymentMonths: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [responseDetails, setResponseDetails] = useState(null)
 
   // handles page change - updates the state
   const handlePageChange = (page) => {
@@ -57,7 +60,7 @@ export default function ApplyForm() {
       }
       console.log("status:", res.status);
       const data = await res.json();
-      console.log(data);
+      setResponseDetails(data);
     } catch (error) {
       console.log(error.message);
       alert(error);
@@ -189,7 +192,7 @@ export default function ApplyForm() {
         </div>
 
       </form>)}
-      {currentPage === 2 && <DocumentComponent addLoan={addLoan} />}
+      {currentPage === 2 && <DocumentComponent addLoan={addLoan} responseDetails={responseDetails}  />}
 
 
       <div className="page-buttons">
@@ -213,35 +216,5 @@ export default function ApplyForm() {
         </button>
       </div>
     </div>
-  );
-}
-function DocumentComponent({ addLoan }) {
-  return (
-    <>
-      {/* Document part  */}
-      <div className="form-group card1">
-        <label for="selectDocumentType">Upload documents(Mandatory *)</label>
-        <br></br>
-        <select
-          className="input-form"
-          name="selectDocumentType"
-          id="selectDocumentType"
-        >
-          <option value="pdf">pdf</option>
-          <option value="jpg">jpg</option>
-          <option value="png">png</option>
-        </select>
-      </div>
-
-      <div className="form-group">
-        <p>Images oŕ Documents(Upload below 2mb)</p>
-        <input className="input-form" type="file" id="chooseFile" />
-        <br></br>
-        <button type="submit" id="uploadDocumentButton">
-          Upload Documents
-        </button>
-      </div>
-      <button onClick={addLoan} id="applyLoan">Apply loan</button>
-    </>
   );
 }
