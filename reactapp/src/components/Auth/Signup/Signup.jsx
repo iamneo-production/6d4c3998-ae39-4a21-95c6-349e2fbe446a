@@ -3,6 +3,9 @@ import {Link } from "react-router-dom";
 import {signUpUser,loginUser} from "../../../utils/userApi"
 
 import './Signup.css'
+import { ToastContainer, toast } from 'react-toastify';
+//  npm i react-toastify@9.0.3
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
   const [userType, setAdminOrUser] = useState("");
@@ -13,46 +16,46 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false)
-
+  const notify = (msg)=>{toast(msg)}
    const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
-  // /^[a-zA-Z0-9]{4,}$/
+
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
   const mobileNumberRegex = /^\d{10}$/;
 
 
 
- async  function handleSignup(){
+   function handleSignup(){
     if(userType==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
       
-      console.log("Please enter all details")
+      notify("Please enter all details")
     }
     else if(!emailRegex.test(email)){
       
-      console.log("Invalid Email");
+      notify("Invalid Email");
      
-      return;
+      
     }
     else if(!passwordRegex.test(password)){  
-      console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      return;
+      notify("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      
     }
     else if(password!==confirmPassword){
-     return;
+      notify("Passcodes does'nt match")
     }
     else if(!mobileNumberRegex.test(mobileNumber)){
-      console.log("Invalid mobile number");
-     return;
+      notify("Invalid mobile number");
+    
     }
     else{
-
-      const response= await signUpUser(email,mobileNumber,password,userType,userName)
+      setLoading(true);
+      signUpUser(email,mobileNumber,password,userType,userName,setLoading)
      
     }
   }
   return (
     <div className="register-container">
     <div className="register-form">
-      <h1 className="navbar-register"> Register </h1>
+      <h1 className="navbar-register"> {loading?'Processing' : 'Register'} </h1>
   
    
         <input

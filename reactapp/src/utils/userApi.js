@@ -1,16 +1,18 @@
 
 import { BASE_URL } from "./utils";
-
-
+import {  toast } from 'react-toastify';
+const notify = (msg)=>{toast(msg)}
 export async function signUpUser(
   email,
   mobileNumber,
   password,
   userType,
   userName,
+  setLoading
 ) {
+
   try {
- 
+    
     const res = await fetch(`${BASE_URL}/user/signup`, {
       method: "POST",
       headers: {
@@ -26,29 +28,34 @@ export async function signUpUser(
     });
     console.log(res.status);
     if (!res.ok) {
+      console.log("ststaus",res.status)
 
-      alert("Signup failed",res.status);
-      throw new Error("Signup failed");
+       throw new Error("Signup failed");
     }
 
     const data = await res.json();
-   console.log(data)
+    console.log(data)
+    setLoading(false)
+
    localStorage.setItem('email', email);
    localStorage.setItem('password', password);
     if (userType === "admin") {
+      notify(`${data.message}`)
       window.location.href = "/admin/login";
     } else {
+      notify(`${data.message}`)
       window.location.href = "/user/login";
     }
     return;
   } catch (error) {
-
+    setLoading(false)
+    notify(error.message);
     console.log(error)
    
   }
 }
 
-export async function loginUser(email, password,setLoading) {
+export async function loginUser(email, password) {
 
   try {
     const res = await fetch(`${BASE_URL}/user/login`, {
@@ -70,7 +77,7 @@ export async function loginUser(email, password,setLoading) {
 
     return res;
   } catch (error) {
-    alert(error.message)
+    notify(error.message)
     return
   }
 }

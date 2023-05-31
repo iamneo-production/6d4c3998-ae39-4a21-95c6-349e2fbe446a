@@ -8,7 +8,10 @@ import { loginUser } from "../../../utils/userApi";
 import { JwtTokenContext } from "../../../context/TokenContext";
 import { createTokenStorage } from "../../../utils/utils";
 
+import {toast} from 'react-toastify'
+
 export default function Login() {
+  const notify = (meg)=>{toast(meg)}
   const lemail = localStorage.getItem("email");
   const lpassword = localStorage.getItem("password");
   const navigate = useNavigate();
@@ -18,6 +21,8 @@ export default function Login() {
   const [email, setEmail] = useState(lemail);
   const [password, setPassword] = useState(lpassword);
 
+  const [loading, setLoading] = useState(false)
+
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passwordRegex =
@@ -25,13 +30,14 @@ export default function Login() {
 
   async function handleLogin() {
     if (email === "" || password === "") {
-      console.log("Enter all fields");
+      notify("Enter all fields");
     } else if (!emailRegex.test(email)) {
-      console.log("Invalid Email");
-      return;
+      notify("Invalid Email");
+      
     } else if (!passwordRegex.test(password)) {
-      return;
+      notify("Invalid Password")
     } else {
+      setLoading(true)
       try {
         const response = await loginUser(email, password);
 
@@ -56,10 +62,14 @@ export default function Login() {
             localStorage.removeItem("password");
             navigate("/admin/home");
           }
+          setLoading(false)
         } else if (data.success === false) {
+          setLoading(false)
           console.log("Invalid email or password");
         }
       } catch (e) {
+        setLoading(false)
+        
         console.log(e);
       }
     }
@@ -68,7 +78,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h1 className="login-title">Login</h1>
+        <h1 className="login-title">{loading?'Loging..!': 'Login'}</h1>
         <div data-testid="loginBox" className="loginBox">
           <div>
             <input
