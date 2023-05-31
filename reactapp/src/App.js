@@ -16,12 +16,15 @@ import RepaymentSchedule from "./components/Admin/ApprovedForm/RepaymentSchedule
 import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage";
 import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm";
 import ApprovedForm from "./components/Admin/ApprovedForm/ApprovedForm";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <JwtTokenProvider>
       <UserProvider>
         <div className="App">
-      
+        <ToastContainer theme="dark"/>
           <Routes>
             {/* PUBLIC ROUTE */}
             <Route path="/" element={<Login />} />
