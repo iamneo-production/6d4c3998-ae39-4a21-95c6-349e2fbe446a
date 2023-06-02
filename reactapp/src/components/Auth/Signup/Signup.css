@@ -32,6 +32,7 @@
 
 .container-btn-para {
   display: inline-flex;
+  align-items: center;
   justify-content: space-evenly; /* Add space between the items */
   margin-bottom: 30px;
 }
@@ -53,7 +54,7 @@
   order: 2; /* Change the order to display the paragraph second */
   font-family: 'Times New Roman', Times, serif;
   font-size: 18px;
-  margin-top: 26px;
+  padding-top: 3px;
 }
 
 .signup-button:hover {
