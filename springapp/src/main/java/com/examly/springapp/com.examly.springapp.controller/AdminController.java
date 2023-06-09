@@ -22,6 +22,8 @@ public class AdminController {
 
     @Autowired
     LoanApplicationService loanService;
+  
+    // approve or reject
     @PutMapping("/admin/editLoan/{loanId}")
     public ResponseEntity<?> approveLoan(@PathVariable Integer loanId, @RequestBody String loanStatusRequest) {
         try {
@@ -45,7 +47,19 @@ public class AdminController {
         }
     }
 
-
+    // editing entire application admin
+    @PutMapping("/admin/editLoanDetails/{loanId}")
+    public ResponseEntity<?> editLoanApplication(@PathVariable Integer loanId,
+            @RequestBody LoanApplicationModel editedLoan) {
+        System.out.println("hi");
+        LoanApplicationModel loan = loanService.getLoanApplicationById(loanId);
+        if (loan != null) {
+            LoanApplicationModel editedLoanApplication = loanService.updateLoanApplication(editedLoan);
+            return ResponseEntity.ok(editedLoanApplication);
+        } else {
+            return new ResponseEntity<>("Loan Application not found", HttpStatus.NOT_FOUND);
+        }
+    }
     @DeleteMapping("/admin/deleteLoan/{loanId}")
     public ResponseEntity<String> deleteLoan(@PathVariable Integer loanId) {
         boolean deleted = loanService.deleteLoanApplication(loanId);
