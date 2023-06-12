@@ -75,4 +75,27 @@ public class AdminController {
         return allLoans != null ? allLoans : Collections.emptyList();
     }
 
+    // Admin view Documents
+    @GetMapping("/admin/getDocuments")
+    public ResponseEntity<Resource> getDocuments(@RequestParam String applicantEmail) {
+        try {
+            DocumentModel document = documentStorage.getDocumentByUserEmail(applicantEmail);
+            if (document != null) {
+                byte[] documentContent = document.getDocumentupload();
+
+                String contentType = document.getDocumenttype();
+
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileid=\"" + document.getDocumentid() + "\"")
+                        .contentType(MediaType.parseMediaType(contentType))
+                        .body(new ByteArrayResource(documentContent));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }
