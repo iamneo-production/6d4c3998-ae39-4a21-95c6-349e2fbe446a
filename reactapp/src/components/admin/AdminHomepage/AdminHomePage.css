@@ -1,0 +1,14 @@
+#textbox {display:flex; flex-flow:row wrap;}
+
+.alignleft {
+  width: 50%;
+  text-align: left;
+}
+.aligncenter {
+  width: 48%;
+  text-align: center;
+}
+.alignright {
+  width: 49%;
+  text-align: right;
+}
