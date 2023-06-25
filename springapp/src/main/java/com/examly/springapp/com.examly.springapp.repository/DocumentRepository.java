@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DocumentRepository extends JpaRepository<DocumentModel,Integer> {
-    DocumentModel findByUserEmail(String email);
+    List<DocumentModel> findByUserEmail(String email);
 
     boolean existsBydocumentid(Integer id);
 

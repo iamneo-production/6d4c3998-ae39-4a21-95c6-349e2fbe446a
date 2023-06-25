@@ -35,24 +35,16 @@ public class DocumentController {
     }
 
     @GetMapping("/user/getDocuments")
-    public ResponseEntity<Resource> getDocuments(Authentication authentication) {
+    public ResponseEntity<List<DocumentModel>> getDocuments(Authentication authentication) {
 
-        String useremail = authentication.getName();
+        String username = authentication.getName();
 
-        DocumentModel document = documentStorage.getDocumentByUserEmail(useremail);
+        List<DocumentModel> documents = documentStorage.getDocumentByUser(username);
 
-        if (document != null) {
-            byte[] documentContent = document.getDocumentupload();
-
-            String contentType = document.getDocumenttype();
-
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileid=\"" + document.getDocumentid() + "\"")
-                    .contentType(MediaType.parseMediaType(contentType))
-                    .body(new ByteArrayResource(documentContent));
-        } else {
-            return ResponseEntity.notFound().build();
+        if (documents.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(documents, HttpStatus.OK);
     }
 
     @PutMapping("/user/editDocuments/{documentid}")
@@ -79,9 +71,5 @@ public class DocumentController {
         documentRepository.deleteBydocumentid(id);
         return new ResponseEntity<>("doc deleted",HttpStatus.OK);
     }
-
-
-
-
 
 }
