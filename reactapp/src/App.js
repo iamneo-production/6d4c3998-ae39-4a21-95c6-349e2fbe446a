@@ -16,6 +16,7 @@ import RepaymentSchedule from "./components/Admin/ApprovedForm/RepaymentSchedule
 import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage";
 import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm";
 import ApprovedForm from "./components/Admin/ApprovedForm/ApprovedForm";
+import Payment from "./components/Customer/Payment/Payment";
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,6 +39,7 @@ function App() {
               <Route index element={<ApplyForm />} />
               <Route path="loanstatus" element={<LoanStatus />} />
               <Route path="profile" element={<Profile />} />
+              <Route path ="payment" element ={<Payment />} />
             </Route>
 
             {/* ADMIN ROUTES */}
