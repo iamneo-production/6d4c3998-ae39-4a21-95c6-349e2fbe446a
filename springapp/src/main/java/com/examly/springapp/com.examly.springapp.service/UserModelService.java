@@ -134,9 +134,4 @@ public class UserModelService {
 
 		return userModelRepository.save(userModel);
 	}
-
-	public UserModel getUserByUserId(int userId) {
-		return userModelRepository.findById(userId);
-    }
-
 }

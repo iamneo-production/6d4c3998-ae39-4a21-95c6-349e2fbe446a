@@ -69,29 +69,22 @@ public class ProfileController {
         }
 
     }
-    
+
     @PutMapping("/user/editProfile/{userId}")
     public ResponseEntity<String> editProfileDetails(@PathVariable int userId, @RequestBody UserProfileModel updatedProfile) {
        // here the userId is foreign hey
         UserProfileModel existingProfile = userProfileService.getProfileByUserId(userId);
 
-        UserModel existingUserModel = userModelService.getUserByUserId(userId);
-
-        if (existingProfile != null && existingUserModel != null) {
+        if (existingProfile != null) {
 
             existingProfile.setUsername(updatedProfile.getUsername());
             existingProfile.setMobileNumber(updatedProfile.getMobileNumber());
             existingProfile.setAddress(updatedProfile.getAddress());
 
-            existingUserModel.setUsername(updatedProfile.getUsername());
-            existingUserModel.setMobileNumber(updatedProfile.getMobileNumber());
-            existingUserModel.setEmail(updatedProfile.getEmail());
-
 
             UserProfileModel updatedUserProfile = userProfileService.saveProfile(existingProfile);
-            UserModel updatedUserModel = userModelService.saveUser(existingUserModel);
 
-            if (updatedUserProfile != null && updatedUserModel != null) {
+            if (updatedUserProfile != null) {
                 return ResponseEntity.ok("Updated profile");
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update profile");
