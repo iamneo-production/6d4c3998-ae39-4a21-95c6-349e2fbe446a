@@ -60,8 +60,9 @@ public class DocumentStorage {
         }
     }
 
-    public DocumentModel getDocumentByUserEmail(String useremail) {
-       // UserModel user = userModelRepository.findByUsername(username);
-        return documentRepository.findByUserEmail(useremail);
-    }
+
+    public List<DocumentModel> getDocumentByUser(String username) {
+        // UserModel user = userModelRepository.findByUsername(username);
+         return documentRepository.findByUserEmail(username);
+     }
 }

@@ -22,7 +22,7 @@ public class AdminController {
 
     @Autowired
     LoanApplicationService loanService;
-  
+
     // approve or reject
     @PutMapping("/admin/editLoan/{loanId}")
     public ResponseEntity<?> approveLoan(@PathVariable Integer loanId, @RequestBody String loanStatusRequest) {
@@ -49,17 +49,18 @@ public class AdminController {
 
     // editing entire application admin
     @PutMapping("/admin/editLoanDetails/{loanId}")
-    public ResponseEntity<?> editLoanApplication(@PathVariable Integer loanId,
-            @RequestBody LoanApplicationModel editedLoan) {
+    public ResponseEntity<?> editLoanApplication(@PathVariable Integer loanId, @RequestBody LoanApplicationModel editedLoan){
         System.out.println("hi");
         LoanApplicationModel loan = loanService.getLoanApplicationById(loanId);
-        if (loan != null) {
-            LoanApplicationModel editedLoanApplication = loanService.updateLoanApplication(editedLoan);
+        if(loan != null){
+            LoanApplicationModel editedLoanApplication= loanService.updateLoanApplication(editedLoan);
             return ResponseEntity.ok(editedLoanApplication);
-        } else {
-            return new ResponseEntity<>("Loan Application not found", HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>("Loan Application not found",HttpStatus.NOT_FOUND);
         }
     }
+
+
     @DeleteMapping("/admin/deleteLoan/{loanId}")
     public ResponseEntity<String> deleteLoan(@PathVariable Integer loanId) {
         boolean deleted = loanService.deleteLoanApplication(loanId);
@@ -70,32 +71,9 @@ public class AdminController {
         }
     }
     @GetMapping("/admin/getAllLoans")
-    public List<LoanApplicationModel> getLoan(Object data) {
+    public List<LoanApplicationModel> getLoan() {
         List<LoanApplicationModel> allLoans = loanService.getAllLoans();
         return allLoans != null ? allLoans : Collections.emptyList();
     }
-
-    // Admin view Documents
-    @GetMapping("/admin/getDocuments")
-    public ResponseEntity<Resource> getDocuments(@RequestParam String applicantEmail) {
-        try {
-            DocumentModel document = documentStorage.getDocumentByUserEmail(applicantEmail);
-            if (document != null) {
-                byte[] documentContent = document.getDocumentupload();
-
-                String contentType = document.getDocumenttype();
-
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileid=\"" + document.getDocumentid() + "\"")
-                        .contentType(MediaType.parseMediaType(contentType))
-                        .body(new ByteArrayResource(documentContent));
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
 
 }

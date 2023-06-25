@@ -1,24 +1,20 @@
 package com.examly.springapp.model;
 
+import lombok.*;
 import javax.persistence.*;
 
 
 @Entity
+@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserProfileModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int userId;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-
     String email;
     String username;
     String password;
@@ -27,99 +23,110 @@ public class UserProfileModel {
     private  double loanId = 0;
     private String address="";
     private double monthlyEmi=0;
-    public UserProfileModel() {
 
-    }
-    public UserProfileModel(int id,int userId ,String email, String password, String username, String mobileNumber, String userRole, double loanId, String address, double monthlyEmi) {
-        this.id = id;
-        this.userId = userId;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.mobileNumber = mobileNumber;
-        this.userRole = userRole;
-        this.loanId = loanId;
-        this.address = address;
-        this.monthlyEmi = monthlyEmi;
-    }
+    // public int getUserId() {
+    //     return userId;
+    // }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    // public void setUserId(int userId) {
+    //     this.userId = userId;
+    // }
 
 
 
-    public String getEmail() {
-        return email;
-    }
+    // public UserProfileModel() {
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // }
+    // public UserProfileModel(int id,int userId ,String email, String password, String username, String mobileNumber, String userRole, double loanId, String address, double monthlyEmi) {
+    //     this.id = id;
+    //     this.userId = userId;
+    //     this.email = email;
+    //     this.password = password;
+    //     this.username = username;
+    //     this.mobileNumber = mobileNumber;
+    //     this.userRole = userRole;
+    //     this.loanId = loanId;
+    //     this.address = address;
+    //     this.monthlyEmi = monthlyEmi;
+    // }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    // public int getId() {
+    //     return id;
+    // }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
+    // public void setId(int id) {
+    //     this.id = id;
+    // }
 
 
 
+    // public String getEmail() {
+    //     return email;
+    // }
 
-    public double getMonthlyEmi() {
-        return monthlyEmi;
-    }
+    // public void setEmail(String email) {
+    //     this.email = email;
+    // }
 
-    public void setMonthlyEmi(double monthlyEmi) {
-        this.monthlyEmi = monthlyEmi;
-    }
+    // public String getPassword() {
+    //     return password;
+    // }
 
-    public double getLoanId() {
-        return loanId;
-    }
+    // public void setPassword(String password) {
+    //     this.password = password;
+    // }
 
-    public void setLoanId(double loanId) {
-        this.loanId = loanId;
-    }
+    // public String getUsername() {
+    //     return username;
+    // }
 
-    public String getAddress() {
-        return address;
-    }
+    // public void setUsername(String username) {
+    //     this.username = username;
+    // }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    // public String getMobileNumber() {
+    //     return mobileNumber;
+    // }
+
+    // public void setMobileNumber(String mobileNumber) {
+    //     this.mobileNumber = mobileNumber;
+    // }
+
+    // public String getUserRole() {
+    //     return userRole;
+    // }
+
+    // public void setUserRole(String userRole) {
+    //     this.userRole = userRole;
+    // }
+
+
+
+
+    // public double getMonthlyEmi() {
+    //     return monthlyEmi;
+    // }
+
+    // public void setMonthlyEmi(double monthlyEmi) {
+    //     this.monthlyEmi = monthlyEmi;
+    // }
+
+    // public double getLoanId() {
+    //     return loanId;
+    // }
+
+    // public void setLoanId(double loanId) {
+    //     this.loanId = loanId;
+    // }
+
+    // public String getAddress() {
+    //     return address;
+    // }
+
+    // public void setAddress(String address) {
+    //     this.address = address;
+    // }
 
 
 
