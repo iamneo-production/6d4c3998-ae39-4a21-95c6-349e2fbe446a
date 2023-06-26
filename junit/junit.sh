@@ -9,14 +9,16 @@ then
 		cd /home/coder/project/workspace/springapp/;
 		mvn clean test;
     else
-        echo "BEadd_user FAILED";
-        echo "BEadd_loan FAILED";
-        echo "BEget_loan FAILED";
-        echo "BELoan FAILED";
+        echo "testGetLoanApplicationAll FAILED";
+        echo "testGetLoanApplicationById FAILED";
+        echo "testCreateLoanApplication FAILED";
+        echo "test_case1 FAILED";
+        echo "test_case2 FAILED";
     fi
 else
-	echo "BEadd_user FAILED";
-    echo "BEadd_loan FAILED";
-    echo "BEget_loan FAILED";
-    echo "BEupdate_loan FAILED";
+        echo "testGetLoanApplicationAll FAILED";
+        echo "testGetLoanApplicationyId FAILED";
+        echo "testCreateLoanApplication FAILED";
+        echo "test_case1 FAILED";
+        echo "test_case2 FAILED";
 fi

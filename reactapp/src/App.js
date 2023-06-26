@@ -1,40 +1,25 @@
-import "./App.css";
-
-import { Route, Routes,Navigate  } from "react-router-dom";
-
-import Login from "./components/Auth/Login/Login";
-import Signup from "./components/Auth/Signup/Signup";
-
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-
-
-
   return (
     <div className="App">
-     
-    <Routes>
-        {/* PUBLIC ROUTE */}
-        <Route path="/" element={<Login />} />
-
-        {/* USER ROUTES */}
-        <Route path="/user/signup" element={<Signup />} />
-        {/* <Route path="/user/applyloan" element={<Customerapplyloan/>}/> */}
-        <Route path="/user/login"  element= { <Login/>} />
-
-        {/* ADMIN ROUTES */}
-
-        <Route path="/admin/login"  element= { <Login/>} />
-
-
-    </Routes>
-
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
 
- export default App;
-
-
-
-
+export default App;

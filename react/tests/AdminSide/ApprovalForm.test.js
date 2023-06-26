@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import ApprovalForm from '../../components/Admin/ApprovalForm/ApprovalForm';
+import ApprovalForm from '../../components/Admin/approvalform/approvalform';
 import { MemoryRouter } from 'react-router';
 
 describe('AddDetails', () => {

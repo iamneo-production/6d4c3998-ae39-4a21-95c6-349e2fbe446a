@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Login from '../../components/Auth/Login/Login';
+import Login from '../../components/Auth/login/login';
 import { MemoryRouter } from 'react-router';
 
 describe('<Login />', () => {
