@@ -1,0 +1,77 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Align items to the top */
+  min-height: calc(100vh - 40px); /* Adjust the value as needed to decrease space */
+  /* background: radial-gradient(circle at center, #9e62ed, #ff6cb3); */
+  background-image: 'https://cdn.wallpapersafari.com/88/10/6JBtGF.jpg';
+  background-size: cover;
+  padding: 20px; /* Increase padding for more space */
+}
+
+.register-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  width: 100%; /* Take full width of the container */
+  max-width: 400px; /* Adjust the width as needed */
+  text-align: center;
+  align-items: center; /* Align items at the center */
+}
+
+.input-style-signup {
+  padding: 14px 10px 10px 12px; /* Adjust the padding as needed */
+  width: 68%; /* Set the width to 100% */
+  margin-bottom: 10px; /* Decrease the margin bottom */
+
+  
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-btn-para {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly; /* Add space between the items */
+  margin-bottom: 30px;
+}
+
+.signup-button {
+  order: 1; /* Change the order to display the submit button first */
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-top: 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: #000000b4; /* Change the background color to black */
+  color: #ffffff; /* Change the text color to white */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.loginPara {
+  order: 2; /* Change the order to display the paragraph second */
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+.signup-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.navbar-register {
+  color: #7919ef;
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: monospace;
+  padding-top: 30px;
+}
+
+#signinLink {
+  text-decoration: none;
+}

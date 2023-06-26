@@ -1,0 +1,13 @@
+.edit-loan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .edit-loan-form .MuiTextField-root {
+    width: 500px;
+  }
+  
