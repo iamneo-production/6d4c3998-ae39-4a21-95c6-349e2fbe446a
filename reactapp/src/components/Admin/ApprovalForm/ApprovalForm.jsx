@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
 import "./ApprovalForm.css";
@@ -20,34 +19,6 @@ function ApprovalForm() {
 
   const handleDelete = (id) => {
     navigate(`/admin/deleteStudent/${id}`);
-=======
-import React, { useState,useContext,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UserContext from "../../../context/UserContext"
-
-import './ApprovalForm.css';
-
-function ApprovalForm() {
-  const [searchQuery, setSearchQuery] = useState('');
-
-          //  User state managment
-          const { userModel,setUserModel } = useContext(UserContext);
-          const navigate = useNavigate();
-          useEffect(() => {
-            const storedUser = JSON.parse(localStorage.getItem('userModel'));
-            if (storedUser && storedUser.userRole === 'admin') {
-              localStorage.removeItem("userModel");
-            console.log("token removal is done by admin home")
-            setUserModel(null)
-              console.log("token removal is done by user home")
-              navigate('/user/login');
-            }
-          }, [navigate]);
-
-
-  const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
->>>>>>> 97abf19 (user-admin-routes-protection)
   };
 
   const viewDocuments = async (applicantEmail) => {
