@@ -13,8 +13,8 @@
         <sonar.sources>springapp/src/main</sonar.sources>
         <sonar.tests>springapp/src/test</sonar.tests>
 =======
-        <sonar.sources>reactapp/src,springapp/src/main</sonar.sources>
-        <sonar.tests>springapp/src/test,puppeteer,react/tests</sonar.tests>
+        <sonar.sources>springapp/src/main</sonar.sources>
+        <sonar.tests>springapp/src/test</sonar.tests>
 >>>>>>> ec7c375eb0cca7bd7c9a7f8018e787209d0ba93a
         <sonar.java.binaries>target</sonar.java.binaries>
     </properties>
