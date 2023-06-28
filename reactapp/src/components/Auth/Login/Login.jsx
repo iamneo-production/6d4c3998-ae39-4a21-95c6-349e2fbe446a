@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
 import { JwtTokenContext } from "../../../context/TokenContext";
 import { createTokenStorage } from "../../../utils/utils";
+import { TextField, Button } from "@mui/material";
 
 import {toast} from 'react-toastify'
 
@@ -78,7 +79,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h1 className="login-title">{loading?'Loging..!': 'Login'}</h1>
+        <h1 className="login-title">{loading?'Logging..!': 'Login'}</h1>
         <div data-testid="loginBox" className="loginBox">
           <div>
             <input
