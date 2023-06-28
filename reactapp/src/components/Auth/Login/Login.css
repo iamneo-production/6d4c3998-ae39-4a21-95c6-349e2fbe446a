@@ -1,50 +1,81 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* background: linear-gradient(to bottom right, #57f6f6, #a640a6); */
+        background-image: image('https://cdn.wallpapersafari.com/88/10/6JBtGF.jpg');      
+  background-size: cover;
+}
+
+.login-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 50px;
+  max-width: 500px;
+  text-align: center;
+}
 
 .input-style-login {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  
-  .login-form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  
-  .navbar-login {
-    background-color: #333333;
-    color: white;
-    padding: 10px;
-    max-width: 800px;
-    margin: 0 auto ;
-    margin-bottom: 10px;
-    margin-top: 20px;
-  }
-  
-  
-  @media (max-width: 600px) {
-  
-    .login-form {
-      max-width: 100%;
-      font-size: 14px;
-    }
-  
-    
-    .navbar-login {
-        font-size: 20px;
-        width: 100%;
-        margin-top: 80px;
-        margin-bottom: 80px;
-    }
-  }
-  #loginLink {
-    text-decoration: none;
-  }
-  .loginPara {
-    font-family: 'Times New Roman', Times, serif;
-  }
-  
-  
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-btn-para {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.login-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333333;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.signup-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ffffff;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-title {
+  color: #880fd4;
+  font-size: 3rem;
+  font-weight: bold;
+ font-family:monospace;
+  margin-bottom: 40px;
+}
+
+.loginPara {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+ 
+}
+#signupLink{
+  text-decoration: none;
+}
