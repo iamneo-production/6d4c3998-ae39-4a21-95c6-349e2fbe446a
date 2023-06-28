@@ -1,18 +1,24 @@
 package com.examly.springapp.controller;
 
 
+import com.examly.springapp.model.DocumentModel;
 import com.examly.springapp.model.LoanApplicationModel;
+import com.examly.springapp.service.DocumentStorage;
 import com.examly.springapp.service.LoanApplicationService;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +28,10 @@ public class AdminController {
 
     @Autowired
     LoanApplicationService loanService;
-  
+
+    @Autowired
+    DocumentStorage documentStorage;
+
     // approve or reject
     @PutMapping("/admin/editLoan/{loanId}")
     public ResponseEntity<?> approveLoan(@PathVariable Integer loanId, @RequestBody String loanStatusRequest) {
@@ -77,9 +86,9 @@ public class AdminController {
 
     // Admin view Documents
     @GetMapping("/admin/getDocuments")
-    public ResponseEntity<Resource> getDocuments(@RequestParam String applicantEmail) {
+    public ResponseEntity<ByteArrayResource> getDocuments(@RequestParam String applicantEmail) {
         try {
-            DocumentModel document = documentStorage.getDocumentByUserEmail(applicantEmail);
+            DocumentModel document = documentStorage.getDocumentByUser(applicantEmail);
             if (document != null) {
                 byte[] documentContent = document.getDocumentupload();
 

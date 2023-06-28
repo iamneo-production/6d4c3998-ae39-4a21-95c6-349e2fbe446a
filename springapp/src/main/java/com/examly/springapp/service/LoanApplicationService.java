@@ -109,7 +109,13 @@ public class LoanApplicationService {
         }
     }
 
+    public LoanApplicationModel updateLoanApplication(LoanApplicationModel editedLoan) {
+        return loanModelRepository.save(editedLoan);
+    }
     public List<LoanApplicationModel> getAllLoans() {
         return loanModelRepository.findAll();
+    }
+    public LoanApplicationModel getLoanApplicationById(Integer loanId) {
+        return loanModelRepository.findLoanByLoanId(loanId);
     }
 }

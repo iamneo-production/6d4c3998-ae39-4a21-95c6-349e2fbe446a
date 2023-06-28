@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 
 
-
 @Service
 public class UserModelService {
 
@@ -103,26 +102,6 @@ public class UserModelService {
   }
 
 
-	public void initCreateDefaultUserAndAdmin(){
-
-		var admin = UserModel.builder()
-				.email("ad@gmail.com")
-				.password(getEncodedPassword("p"))
-				.userRole("admin")
-				.mobileNumber("xxx")
-				.username("xxx")
-				.build();
-		userModelRepository.save(admin);
-
-		var user =  UserModel.builder()
-				.email("u@gmail.com")
-				.password(getEncodedPassword("p"))
-				.userRole("user")
-				.mobileNumber("xxx")
-				.username("xxx")
-				.build();
-		userModelRepository.save(user);
-	}
 
 	public String getEncodedPassword(String pass){
 		return passwordEncoder.encode(pass);
@@ -134,4 +113,8 @@ public class UserModelService {
 
 		return userModelRepository.save(userModel);
 	}
+
+    public UserModel getUserByUserId(int userId) {
+		return userModelRepository.findById(userId);
+    }
 }

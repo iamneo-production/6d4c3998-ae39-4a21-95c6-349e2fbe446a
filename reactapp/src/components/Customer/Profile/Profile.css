@@ -36,16 +36,21 @@ h2 {
 
 .form-field {
   margin-bottom: 10px;
+  display: flex;
+  
 }
-
+.form-field input{
+  margin-left: 10px;
+}
 label {
   font-size: 18px;
   font-weight: bold;
+  
 }
 
 span {
   display: block;
-  margin-top: 5px;
+  margin-left: 10px;
 }
 
 /* Responsive styles */

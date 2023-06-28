@@ -27,4 +27,7 @@ public class UserPaymentDetails {
     @OneToOne
     @JoinColumn(name = "user_profile_id")
     private UserProfileModel userProfileModel;
+
+    
+
 }
