@@ -4,14 +4,19 @@ import com.examly.springapp.model.DocumentModel;
 import com.examly.springapp.repository.DocumentRepository;
 import com.examly.springapp.service.DocumentStorage;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 import java.util.List;
@@ -35,16 +40,24 @@ public class DocumentController {
     }
 
     @GetMapping("/user/getDocuments")
-    public ResponseEntity<List<DocumentModel>> getDocuments(Authentication authentication) {
+    public ResponseEntity<ByteArrayResource> getDocuments(Authentication authentication) {
 
-        String username = authentication.getName();
+        String useremail = authentication.getName();
 
-        List<DocumentModel> documents = documentStorage.getDocumentByUser(username);
+        DocumentModel document = documentStorage.getDocumentByUser(useremail);
 
-        if (documents.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (document != null) {
+            byte[] documentContent = document.getDocumentupload();
+
+            String contentType = document.getDocumenttype();
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileid=\"" + document.getDocumentid() + "\"")
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .body(new ByteArrayResource(documentContent));
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(documents, HttpStatus.OK);
     }
 
     @PutMapping("/user/editDocuments/{documentid}")

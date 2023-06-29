@@ -1,4 +1,6 @@
-export const BASE_URL = "https://8081-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/";
+// export const BASE_URL = "https://8081-fdbebebebffaeddaeafbeafbbdcdbaec.project.examly.io/";
+// export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "https://8080-fdbebebebffaeddaeafbeaffdffdfaaefb.project.examly.io";
 
 
 export function removeToken(){

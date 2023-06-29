@@ -6,11 +6,25 @@ public class LoginResponseModel {
     @Autowired
     private UserModel userModel;
 
+    @Autowired
+    private String token ;
+
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     private boolean isSuccess;
 
-    public LoginResponseModel(UserModel userModel, boolean isSuccess) {
+    public LoginResponseModel(UserModel userModel, boolean isSuccess, String token) {
         this.userModel = userModel;
         this.isSuccess = isSuccess;
+        this.token = token ;
     }
 
     public UserModel getUserModel() {

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+
 import Login from "./components/Auth/Login/Login";
 import Signup from "./components/Auth/Signup/Signup";
 import { UserProvider } from "./context/UserContext";
@@ -16,12 +16,16 @@ import RepaymentSchedule from "./components/Admin/ApprovedForm/RepaymentSchedule
 import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage";
 import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm";
 import ApprovedForm from "./components/Admin/ApprovedForm/ApprovedForm";
+import Payment from "./components/Customer/Payment/Payment";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <JwtTokenProvider>
       <UserProvider>
         <div className="App">
-          <ToastContainer />
+        <ToastContainer theme="dark"/>
           <Routes>
             {/* PUBLIC ROUTE */}
             <Route path="/" element={<Login />} />
@@ -35,6 +39,7 @@ function App() {
               <Route index element={<ApplyForm />} />
               <Route path="loanstatus" element={<LoanStatus />} />
               <Route path="profile" element={<Profile />} />
+              <Route path ="payment" element ={<Payment />} />
             </Route>
 
             {/* ADMIN ROUTES */}

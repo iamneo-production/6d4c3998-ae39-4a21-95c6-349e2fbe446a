@@ -27,7 +27,7 @@ public class DocumentStorage {
     @Autowired
     UserProfileModelRepository userProfileModelRepository;
     public DocumentModel saveDoc(MultipartFile file, String username){
-       // String docname = file.getOriginalFilename();
+        // String docname = file.getOriginalFilename();
         try{
             UserProfileModel userProfile = userProfileModelRepository.findByEmail(username);
             DocumentModel document = new DocumentModel();
@@ -60,8 +60,8 @@ public class DocumentStorage {
         }
     }
 
-    public List<DocumentModel> getDocumentByUser(String username) {
-       // UserModel user = userModelRepository.findByUsername(username);
-        return documentRepository.findByUserEmail(username);
+    public DocumentModel getDocumentByUser(String useremail) {
+        // UserModel user = userModelRepository.findByUsername(username);
+        return documentRepository.findByUserEmail(useremail);
     }
 }

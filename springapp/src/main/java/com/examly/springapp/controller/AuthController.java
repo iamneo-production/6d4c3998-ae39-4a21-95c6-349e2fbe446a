@@ -1,7 +1,6 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.model.*;
-
 import com.examly.springapp.service.JwtService;
 import com.examly.springapp.service.UserModelService;
 import com.examly.springapp.service.UserProfileService;
@@ -10,13 +9,11 @@ import com.examly.springapp.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Random;
-
 
 @CrossOrigin
 @RestController
@@ -61,7 +58,19 @@ public class AuthController {
          UserModel savedUser = userModelService.saveUser(userModel);
         if (savedUser != null) {
 
-            UserProfileModel userProfile = new UserProfileModel(savedUser.getId(), savedUser.getId(), savedUser.getEmail(),savedUser.getPassword(),savedUser.getUsername(),savedUser.getMobileNumber(),savedUser.getUserRole(),0,"",0);
+            UserProfileModel userProfile = new UserProfileModel(
+                   111,
+                    savedUser.getId(),
+                    savedUser.getEmail(),
+                    savedUser.getUsername(),
+                    savedUser.getPassword(),
+                    savedUser.getMobileNumber(),
+                    savedUser.getUserRole(),
+                    0,
+                    "",
+                    0
+            );
+
             UserProfileModel savedUserProfile =  userProfileService.saveProfile(userProfile);
            // System.out.println("userProfile :"+ savedUserProfile.getEmail()+savedUserProfile.getPassword());
 

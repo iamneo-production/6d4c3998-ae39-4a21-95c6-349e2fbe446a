@@ -84,11 +84,14 @@ public class LoanApplicationService {
                 double emi = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, repaymentMonths))
                         / (Math.pow(1 + monthlyInterestRate, repaymentMonths) - 1);
 
-                existingLoan.setStatus(loanStatus);
+                        existingLoan.setStatus(loanStatus);
+                        existingLoan.setEMI(Math.round(emi));
+                        existingLoan.setTotalAmountWithIntrest(Integer.parseInt(existingLoan.getLoanRepaymentMonths()) * Math.round(emi) );
+                        UserProfileModel userProfile = userProfileRepo.findByEmail(existingLoan.getApplicantEmail());
+                        userProfile.setMonthlyEmi(Math.round(emi));
+                        userProfileRepo.save(userProfile);
 
-                UserProfileModel userProfile = userProfileRepo.findByEmail(existingLoan.getApplicantEmail());
-                userProfile.setMonthlyEmi(emi);
-                userProfileRepo.save(userProfile);
+              
             }
             else {
                 UserProfileModel userProfile = userProfileRepo.findByEmail(existingLoan.getApplicantEmail());
@@ -106,7 +109,13 @@ public class LoanApplicationService {
         }
     }
 
+    public LoanApplicationModel updateLoanApplication(LoanApplicationModel editedLoan) {
+        return loanModelRepository.save(editedLoan);
+    }
     public List<LoanApplicationModel> getAllLoans() {
         return loanModelRepository.findAll();
+    }
+    public LoanApplicationModel getLoanApplicationById(Integer loanId) {
+        return loanModelRepository.findLoanByLoanId(loanId);
     }
 }

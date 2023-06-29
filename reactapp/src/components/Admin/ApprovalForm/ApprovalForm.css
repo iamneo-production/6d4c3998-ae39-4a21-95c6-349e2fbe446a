@@ -1,3 +1,5 @@
+/* ApprovalForm.css */
+
 .adminLoanGrid1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5,10 +7,10 @@
   margin: 0 auto;
   max-width: 800px;
   padding: 1rem;
-  background-color: lightgrey;
+  background: url("https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000");
   border-radius: 5px;
   margin-top: 20px;
-  position: relative; /* Added */
+  position: relative;
 }
 
 .adminLoanGrid1 .button-container {
@@ -23,7 +25,8 @@
   align-items: center;
 }
 
-.adminLoanGrid1 .approve-button {
+.adminLoanGrid1 .approve-button,
+.adminLoanGrid1 .reject-button {
   background-color: #2ea44f;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
@@ -41,14 +44,6 @@
 
 .adminLoanGrid1 .reject-button {
   background-color: #fa0202;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  padding: 8px 20px;
-  text-decoration: none;
   margin-right: 15px;
 }
 
@@ -56,29 +51,19 @@
   background-color: #da0808;
 }
 
-/* .adminLoanGrid1 .icon-container {
-  display: flex;
-}
-
-.adminLoanGrid1 .icon-container i {
-  font-size: 20px;
-  margin-left: 10px;
-  cursor: pointer;
-} */
-
 .adminLoanGrid1 .icon-container {
   position: absolute;
   top: 6px;
-  right: 2;
+  right: 2px;
   display: flex;
   align-items: center;
 }
 
 .adminLoanGrid1 .icon-container i {
   font-size: 20px;
-  /* margin-left: 10px; */
   cursor: pointer;
 }
+
 .grid-item {
   background-color: #f7f7f7;
   border: 1px solid #ddd;
@@ -101,7 +86,8 @@
   border-bottom: 1px dotted black;
 }
 
-#editLoan{
+#editLoan,
+#deleteLoan {
   color: grey;
   font-size: 1rem;
   background-color: #f8f9fa;
@@ -109,11 +95,16 @@
   padding: 6px 6px;
   border-radius: 4px;
 }
-#deleteLoan{
-  color: grey;
-  font-size: 1rem;
-  background-color: #f8f9fa;
-  border: 1px solid grey;
-  padding: 6px 6px;
-  border-radius: 4px;
+
+
+.img-contain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(0px);
+  
+}
+.image{
+  height: 500px;;
+  width:600px;
 }

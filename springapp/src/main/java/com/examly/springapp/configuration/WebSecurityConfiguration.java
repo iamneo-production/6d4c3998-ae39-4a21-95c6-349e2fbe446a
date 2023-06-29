@@ -42,16 +42,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(
+                .anyRequest().permitAll()
+                // .antMatchers(
 
-                        "/user/login",
-                        "/admin/login",
-                        "/admin/signup",
-                        "/user/signup",
-                        "/"
-                ).permitAll()
-                .antMatchers(HttpHeaders.ALLOW).permitAll()
-                .anyRequest().authenticated()
+                //         "/user/login",
+                //         "/admin/login",
+                //         "/admin/signup",
+                //         "/user/signup",
+                //         "/"
+                // ).permitAll()
+                // .antMatchers(HttpHeaders.ALLOW).permitAll()
+                // .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
