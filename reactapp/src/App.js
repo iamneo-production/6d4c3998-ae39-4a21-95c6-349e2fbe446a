@@ -50,8 +50,8 @@ function App() {
 
             <Route path="/admin/getAllLoans" element={<ApprovalForm />}></Route>
             <Route path="/admin/LoanDetails" element={<ApprovedForm />}></Route>
-            <Route path="/admin/editStudent/:id" element={<EditLoan />} />
-            <Route path="/admin/deleteStudent/:id" element={<DeleteLoan />} />
+            <Route path="/admin/editLoan/:id" element={<EditLoan />} />
+            <Route path="/admin/deleteLoan/:id" element={<DeleteLoan />} />
             <Route
               path="/admin/generateSchedule"
               element={<RepaymentSchedule />} />
