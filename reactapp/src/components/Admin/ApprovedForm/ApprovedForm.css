@@ -1,0 +1,119 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 2px rgba(24, 21, 21, 0.1) ;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 25px;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 1rem;
+  }
+
+  .search-input {
+    margin-bottom: 1rem;
+  }
+
+  .search-button {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+/* .grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 20px;
+} */
+
+
+.grid-container,
+.grid-container1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(0px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0);
+  transition: transform 0.3s ease-in-out;
+  margin-left:160px;
+  margin-right:160px;
+}
+
+.grid-container:hover,
+.grid-container1:hover {
+  transform: scale(1.05);
+}
+
+.grid-container p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.grid-container1 {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #3d37c5;
+}
+
+/* Additional styling for the layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
