@@ -1,6 +1,10 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.model.LoanApplicationModel;
+
+//for test cases
+import com.examly.springapp.model.LoanApplication;
+
 import com.examly.springapp.model.UserProfileModel;
 import com.examly.springapp.repository.UserProfileModelRepository;
 import com.examly.springapp.service.LoanApplicationService;
@@ -10,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
 
 
 
@@ -40,6 +45,16 @@ public class LoanController {
 
         return new ResponseEntity<>("Failed to add loan",HttpStatus.FORBIDDEN);
     }
+
+    //for test cases
+    @PostMapping("/admin/loan")
+    public ResponseEntity<String> adminloan(@RequestBody LoanApplication loanApplication) {
+        loanService.addAdminLoan(loanApplication);
+        return ResponseEntity.status(HttpStatus.CREATED).body("loan-added");
+    }
+
+
+
 
     @GetMapping("/user/viewLoan")
     public ResponseEntity<?> getLoanOfTheUser(Authentication authentication) {
