@@ -1,6 +1,10 @@
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
+<<<<<<< HEAD
 import { ToastContainer } from "react-toastify";
+=======
+
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
 import Login from "./components/Auth/Login/Login";
 import Signup from "./components/Auth/Signup/Signup";
 import { UserProvider } from "./context/UserContext";
@@ -16,12 +20,23 @@ import RepaymentSchedule from "./components/Admin/ApprovedForm/RepaymentSchedule
 import AdminHomePage from "./components/Admin/AdminHomePage/AdminHomePage";
 import ApprovalForm from "./components/Admin/ApprovalForm/ApprovalForm";
 import ApprovedForm from "./components/Admin/ApprovedForm/ApprovedForm";
+<<<<<<< HEAD
+=======
+import Payment from "./components/Customer/Payment/Payment";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
 function App() {
   return (
     <JwtTokenProvider>
       <UserProvider>
         <div className="App">
+<<<<<<< HEAD
           <ToastContainer />
+=======
+        <ToastContainer theme="dark"/>
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
           <Routes>
             {/* PUBLIC ROUTE */}
             <Route path="/" element={<Login />} />
@@ -35,6 +50,10 @@ function App() {
               <Route index element={<ApplyForm />} />
               <Route path="loanstatus" element={<LoanStatus />} />
               <Route path="profile" element={<Profile />} />
+<<<<<<< HEAD
+=======
+              <Route path ="payment" element ={<Payment />} />
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
             </Route>
 
             {/* ADMIN ROUTES */}
@@ -45,8 +64,13 @@ function App() {
 
             <Route path="/admin/getAllLoans" element={<ApprovalForm />}></Route>
             <Route path="/admin/LoanDetails" element={<ApprovedForm />}></Route>
+<<<<<<< HEAD
             <Route path="/admin/editStudent/:id" element={<EditLoan />} />
             <Route path="/admin/deleteStudent/:id" element={<DeleteLoan />} />
+=======
+            <Route path="/admin/editLoan/:id" element={<EditLoan />} />
+            <Route path="/admin/deleteLoan/:id" element={<DeleteLoan />} />
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
             <Route
               path="/admin/generateSchedule"
               element={<RepaymentSchedule />} />

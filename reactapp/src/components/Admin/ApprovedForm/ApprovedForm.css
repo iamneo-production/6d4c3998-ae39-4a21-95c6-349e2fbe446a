@@ -57,6 +57,7 @@
   max-width: 600px;
   padding: 20px;
 } */
+<<<<<<< HEAD
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -129,3 +130,65 @@ border: 1px solid grey;
 padding: 6px 6px;
 border-radius: 4px;
 }
+=======
+
+
+.grid-container,
+.grid-container1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(0px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0);
+  transition: transform 0.3s ease-in-out;
+  margin-left:160px;
+  margin-right:160px;
+}
+
+.grid-container:hover,
+.grid-container1:hover {
+  transform: scale(1.05);
+}
+
+.grid-container p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.grid-container1 {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #3d37c5;
+}
+
+/* Additional styling for the layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09

@@ -1,0 +1,10 @@
+com/examly/springapp/repository/AdminModelRepository.class
+com/examly/springapp/repository/UserModelRepository.class
+com/examly/springapp/SpringappApplication.class
+com/examly/springapp/AuthController.class
+com/examly/springapp/service/UserModelService.class
+com/examly/springapp/model/LoginModel.class
+com/examly/springapp/model/UserModel.class
+com/examly/springapp/model/AdminModel.class
+com/examly/springapp/model/LoginResponseModel.class
+com/examly/springapp/controller/AdminController.class

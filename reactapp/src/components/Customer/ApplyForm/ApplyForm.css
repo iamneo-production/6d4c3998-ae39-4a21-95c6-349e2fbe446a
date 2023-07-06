@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .input-form{
   width: 50%;
   padding: 12px 20px;
@@ -41,3 +42,204 @@ font-size: 16px;
 
 
 
+=======
+body {
+  /* background-color: whitesmoke; */
+  background-image: url("https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000");
+}
+
+.apply-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.card1 {
+  /* new 1 */
+  position: relative;
+  background-color: rgba(246, 239, 239, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  backdrop-filter: blur(0px);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-form {
+  /* width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px; */
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-size: medium;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.form1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  color: #000;
+  transition: background-color 0.3s ease;
+}
+
+.page-button.current-page {
+  background-color: #000;
+  color: #fff;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+#uploadDocumentButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#applyLoan {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+button#applyLoan:disabled {
+  /* Disabled button style */
+  background-color: #ccc;
+  color: #888;
+}
+
+button#uploadDocumentButton:disabled {
+  /* Disabled button style */
+  background-color: #ccc;
+  color: #888;
+}
+
+/*    new 1 */
+/* response container css */
+.loan-status {
+  position: absolute;
+  bottom: 200px;
+  right: 100px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.loan-status span {
+  color: rgb(184, 15, 245);
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline;
+}
+
+/* Loan details  */
+.response-loan-details {
+  position: absolute;
+  color: #000;
+  background-color: #fff;
+  width: 400px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.response-loan-details p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.response-loan-details::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 0 10px 10px;
+  border-color: transparent transparent #fff;
+}
+
+.response-loan-details::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 10px 10px 0;
+  border-color: #fff transparent transparent;
+}
+
+.loan-status-approve {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #333;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.congratulations {
+  font-family: "Arial Black", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #28d3a8;
+}
+
+.view-loan-details {
+  color: #ae4ae4;
+  cursor: pointer;
+}
+
+.view-loan-details:hover {
+  text-decoration: underline;
+}
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09

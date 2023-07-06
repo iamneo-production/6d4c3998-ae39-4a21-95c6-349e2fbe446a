@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 label{
     color :rgb(8, 8, 90);
     font-weight: bold;
@@ -9,4 +10,88 @@ label{
 .trackButton{
     background-color: red;
     border-radius: 12px;
+=======
+.card {
+    /* background-color: white; */
+    border-radius: 15px;
+    /* box-shadow: 5px 5px 20px rgb(0, 0, 0), -5px -5px 20px rgb(255, 255, 255); */
+    padding: 20px;
+    width: 30%;
+    position: relative;
+    margin-top: 120px;
+    margin-left: 35%;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    /* border-radius: 10px; */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    
+    
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.enterLoanId {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.trackButton {
+    padding: 10px 20px;
+    background-color: rgb(34, 193, 34);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* .card-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: auto;
+    border-radius: 15px;
+  } */
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+        margin: 20px;
+    }
+
+    .enterLoanId {
+        width: 100%;
+    }
+
+    .card-image {
+        width: 100px;
+    }
+>>>>>>> 3013bd254f4f104ee460805f1ba912c4c5875f09
 }
