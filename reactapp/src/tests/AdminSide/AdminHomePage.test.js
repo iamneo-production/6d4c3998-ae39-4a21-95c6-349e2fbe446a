@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import AdminHomePage from '../../components/Admin/AdminHomePage/AdminHomePage';
+import AdminHomePage from '../../components/Admin/adminhomepage/adminhomepage';
 import { MemoryRouter } from 'react-router';
 
 describe('Home Page', () => {

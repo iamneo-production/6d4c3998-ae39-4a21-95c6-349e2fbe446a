@@ -1,136 +1,159 @@
-// import React, { useState, useEffect } from "react";
-// import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
-// import { useNavigate, useParams } from "react-router-dom";
-// import approvaldata from "../../../data/approvaldata.json";
-// import { TextField, Button } from "@mui/material";
-// import "./DeleteLoan.css";
+import React, { useState, useEffect } from "react";
+import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
+import { useNavigate, useParams } from "react-router-dom";
+import { TextField, Button } from "@mui/material";
+import { BASE_URL } from "../../../utils/utils";
+import "./EditLoan.css"
 
+const DeleteLoan = () => {
+  const token = localStorage.getItem("jwtToken");
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-// const LoanDetails = {
-//   applicantLoanID: "",
-//   applicantName: "",
-//   applicantPhoneNo: "",
-//   applicantEmail: "",
-//   applicantAadhar: "",
-//   applicantPanNo: "",
-//   applicantSalary: "",
-//   applicantLoanamt: "",
-//   applicantRepaymentMon: "",
-// };
+  const [formData, setFormData] = useState({
+    loanId: "",
+    applicantName: "",
+    applicantMobile: "",
+    applicantEmail: "",
+    applicantAadhaar: "",
+    applicantPan: "",
+    applicantSalary: "",
+    loanAmountRequired: "",
+    loanRepaymentMonths: ""
+  });
 
-// const DeleteLoan = () => {
-//   const [formData, setFormData] = useState(LoanDetails);
-//   const navigate = useNavigate();
-//   const { id } = useParams();
+  useEffect(() => {
+    async function getLoanData() {
+      try {
+        const res = await fetch(`${BASE_URL}/admin/getAllLoans`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) throw Error("Failed to get loan data");
+        const data = await res.json();
+        const loan = data.find((loan) => loan.loanId === parseInt(id));
+        setFormData((prevData) => ({
+          ...prevData,
+          ...loan,
+        }));
+        console.log(id);
+        //setFormData(loan);
+      } catch (e) {
+        console.log(e.message, e);
+      }
+    }
 
-//   useEffect(() => {
-//     const editData = approvaldata.find((loan) => loan.applicantLoanID === id);
-//     if (editData) {
-//       setFormData(editData);
-//     } else {
-//       console.log("Data Not found");
-//     }
-//   }, [id, navigate]);
+    getLoanData();
+  }, [id, token]);
 
-//   const handleInputChange = (e, key) => {
-//     const currentData = {
-//       ...formData,
-//     };
-//     currentData[key] = e.target.value;
-//     setFormData(currentData);
-//   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-//   const handleFormEdit = (e) => {
-//     e.preventDefault();
-//     alert(`Are you sure want to Delete this Loan`)
-//     navigate('/admin/getAllLoans');
-    
-//   };
+  const handleDeleteLoan = async () => {
+    alert("Are you sure want to delete this Loan");
+    try {
+      const res = await fetch(`${BASE_URL}/admin/deleteLoan/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        navigate("/admin/getAllLoans"); // Redirect to loans page after successful deletion
+      } else {
+        throw Error("Failed to delete loan");
+      }
+    } catch (error) {
+      console.log(error.message, error);
+    }
+  };
 
-// //   const editStudent = () => {
-// //     const updatedData = approvaldata.map((loan) => {
-// //       if (loan.applicantLoanID === id) {
-// //         return formData;
-// //       }
-// //       return loan;
-// //     });
+ 
 
-// //     try {
-// //       localStorage.setItem('approvalData', JSON.stringify(updatedData));
-// //       console.log("Student details updated successfully.");
-// //       navigate("/admin/getAllLoans");
-// //     } catch (error) {
-// //       console.error("Error updating student details:", error);
-// //     }
-// //   };
+  return (
+    <div>
+      <AdminNavbar />
 
-//   return (
-//     <div>
-//       <AdminNavbar />
+      <form onSubmit={handleDeleteLoan} className="edit-loan-form">
+        <TextField
+          label="Loan Id"
+          value={formData.loanId}
+          name="loanId"
+          onChange={handleInputChange}
+          disabled
+        />
 
-//       <form onSubmit={handleFormEdit} className="edit-loan-form">
-//         <TextField
-//           label="Loan ID"
-//           value={formData.applicantLoanID}
-//           onChange={(e) => handleInputChange(e, "applicantLoanID")}
-//           disabled
-//         />
+        <TextField
+          label="Name"
+          value={formData.applicantName}
+          name="applicantName"
+          onChange={handleInputChange}
+          disabled
+        />
 
-//         <TextField
-//           label="Name"
-//           value={formData.applicantName}
-//           onChange={(e) => handleInputChange(e, "applicantName")} disabled
-//         />
+        <TextField
+          label="Mobile Number"
+          value={formData.applicantMobile}
+          name="applicantMobile"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="Phone Number"
-//           value={formData.applicantPhoneNo}
-//           onChange={(e) => handleInputChange(e, "applicantPhoneNo")} disabled
-//         />
+        <TextField
+          label="Email"
+          value={formData.applicantEmail}
+          name="applicantEmail"
+          onChange={handleInputChange}
+          disabled
+        />
 
-//         <TextField
-//           label="Email"
-//           value={formData.applicantEmail}
-//           onChange={(e) => handleInputChange(e, "applicantEmail")} 
-//           disabled
-//         />
+        <TextField
+          label="Aadhar"
+          value={formData.applicantAadhaar}
+          name="applicantAadhaar"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="Aadhar Number"
-//           value={formData.applicantAadhar}
-//           onChange={(e) => handleInputChange(e, "applicantAadhar")} disabled
-//         />
+        <TextField
+          label="PAN"
+          value={formData.applicantPan}
+          name="applicantPan"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="PAN Number"
-//           value={formData.applicantPanNo}
-//           onChange={(e) => handleInputChange(e, "applicantPanNo")} disabled
-//         />
+        <TextField
+          label="Salary"
+          value={formData.applicantSalary}
+          name="applicantSalary"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="Salary"
-//           value={formData.applicantSalary}
-//           onChange={(e) => handleInputChange(e, "applicantSalary")} 
-//           disabled
-//         />
+        <TextField
+          label="Loan Amount"
+          value={formData.loanAmountRequired}
+          name="loanAmountRequired"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="Loan Amount"
-//           value={formData.applicantLoanamt}
-//           onChange={(e) => handleInputChange(e, "applicantLoanamt")} disabled
-//         />
+        <TextField
+          label="Repayment Months"
+          value={formData.loanRepaymentMonths}
+          name="loanRepaymentMonths"
+          onChange={handleInputChange}
+        />
 
-//         <TextField
-//           label="Repayment Months"
-//           value={formData.applicantRepaymentMon}
-//           onChange={(e) => handleInputChange(e, "applicantRepaymentMon")} disabled
-//         />
+        <Button variant="contained" type="submit">
+          Delete
+        </Button>
+      </form>
+    </div>
+  );
+};
 
-//         <Button variant="contained" type="submit" >Delete</Button>
-//       </form>
-//     </div>
-//   );
-// };
-
-
-// export default DeleteLoan;
+export default DeleteLoan;
