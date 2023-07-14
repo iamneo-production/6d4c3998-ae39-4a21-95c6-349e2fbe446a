@@ -67,7 +67,17 @@ public class LoanController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/user/viewLoan/{loanId}")
+    public ResponseEntity<?> getLoanById(@PathVariable Integer loanId) {
 
+
+        LoanApplicationModel loanInDb = loanService.getLoanApplicationById(loanId);
+        if (loanInDb != null) {
+            return ResponseEntity.ok(loanInDb);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PutMapping("/user/editLoan/{loanId}")
     public ResponseEntity<?> editLoan(@PathVariable Integer loanId, @RequestBody LoanApplicationModel updatedLoanModel) {

@@ -35,8 +35,7 @@ public class AdminController {
     @Autowired
     LoanApplicationService loanService;
 
-    @Autowired
-    DocumentStorage documentStorage;
+
 
     @Autowired
     DocumentStorage documentStorage;
@@ -60,29 +59,25 @@ public class AdminController {
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
-
+                               
             return ResponseEntity.badRequest().build();
         }
     }
 
     // editing entire application admin
     @PutMapping("/admin/editLoanDetails/{loanId}")
-    public ResponseEntity<?> editLoanApplication(@PathVariable Integer loanId,
-            @RequestBody LoanApplicationModel editedLoan) {
+  
     public ResponseEntity<?> editLoanApplication(@PathVariable Integer loanId,
             @RequestBody LoanApplicationModel editedLoan) {
         System.out.println("hi");
         LoanApplicationModel loan = loanService.getLoanApplicationById(loanId);
-        if (loan != null) {
-            LoanApplicationModel editedLoanApplication = loanService.updateLoanApplication(editedLoan);
+    
         if (loan != null) {
             LoanApplicationModel editedLoanApplication = loanService.updateLoanApplication(editedLoan);
             return ResponseEntity.ok(editedLoanApplication);
         } else {
             return new ResponseEntity<>("Loan Application not found", HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>("Loan Application not found", HttpStatus.NOT_FOUND);
-        }
+        } 
     }
     @DeleteMapping("/admin/deleteLoan/{loanId}")
     public ResponseEntity<String> deleteLoan(@PathVariable Integer loanId) {
@@ -126,8 +121,11 @@ public class AdminController {
             return ResponseEntity.badRequest().build();
         }
     }
-
+    @GetMapping("/admin/getAllLoans")
+    public List<LoanApplicationModel> getLoan() {
+        List<LoanApplicationModel> allLoans = loanService.getAllLoans();
+        return allLoans != null ? allLoans : Collections.emptyList();
+    }
 
 }
 
-}
