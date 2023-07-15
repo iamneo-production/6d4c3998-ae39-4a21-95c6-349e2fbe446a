@@ -6,9 +6,6 @@ import com.examly.springapp.model.UserProfileModel;
 import com.examly.springapp.repository.LoanModelRepository;
 import com.examly.springapp.repository.UserProfileModelRepository;
 
-//for test 
-import com.examly.springapp.model.LoanApplication;
-import com.examly.springapp.repository.LoanApplicationrepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,12 +118,4 @@ public class LoanApplicationService {
     public LoanApplicationModel getLoanApplicationById(Integer loanId) {
         return loanModelRepository.findLoanByLoanId(loanId);
     }
-
-    @Autowired
-    private  LoanApplicationrepo loanApplicationrepo;
-
-    public void addAdminLoan(LoanApplication loanApplication) {
-        loanApplicationrepo.save(loanApplication);
-    }
 }
-

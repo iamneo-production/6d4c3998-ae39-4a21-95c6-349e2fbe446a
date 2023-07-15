@@ -78,17 +78,11 @@ public class AdminController {
             return new ResponseEntity<>("Failed to delete loan application", HttpStatus.NOT_FOUND);
         }
     }
-    // @GetMapping("/admin/getAllLoans")
-
-    //changes for test cases
-    @GetMapping("/admin/loan")
+    @GetMapping("/admin/getAllLoans")
     public List<LoanApplicationModel> getLoan(Object data) {
         List<LoanApplicationModel> allLoans = loanService.getAllLoans();
         return allLoans != null ? allLoans : Collections.emptyList();
     }
-
-    
-    
 
     // Admin view Documents
     @GetMapping("/admin/getDocuments")
