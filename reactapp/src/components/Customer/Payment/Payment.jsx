@@ -8,54 +8,43 @@ export default function Payment() {
   const [LoanDetails, setLoanDetails] = useState(null);
   const token = localStorage.getItem("jwtToken");
   const [prevPayments, setprevPayments] = useState([])
-  console.log("prvious paymenyts", prevPayments)
-  // we need to get a previous payment if the user has made any prev paymnet 
+  console.log("prvious paymenyts",prevPayments)
+ // we need to get a previous payment if the user has made any prev paymnet 
 
+ useEffect(()=>{
+
+  async function getPaymentDetails(){
+    const res = await fetch(`${BASE_URL}/user/getPaymentDetails`,{
+      method: "GET",
+      headers:{
+        'Content-Type' : 'application/json',
+        Authorization : `Bearer ${token}`
+      }
+    })
+    const data = await res.json();
+    console.log("prev payments",data)
+    setprevPayments(data)
+  }
+  getPaymentDetails()
+ },[])
+    
+
+  
   useEffect(() => {
-
-    async function getPaymentDetails() {
-      const res = await fetch(`${BASE_URL}/user/getPaymentDetails`, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const data = await res.json();
-      console.log("prev payments", data)
-      setprevPayments(data)
-    }
-    getPaymentDetails()
-  }, [])
-
-
-
-  useEffect(() => {
-
-    async function getLoan() {
-      try {
+    async function  getLoan(){
         const token = localStorage.getItem('jwtToken')
-
-        const respons = await fetch(`${BASE_URL}/user/viewLoan`, {
+        const respons = await fetch(`${BASE_URL}/user/viewLoan`,{
           method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+          headers:{
+            'Content-Type' : 'application/json',
+            Authorization : `Bearer ${token}`
           }
         });
-        if (!respons.ok) {
-          throw Error("Error geting loan")
-        }
         const LoanData = await respons.json();
-
-        console.log("loanData", LoanData);
+        console.log("loanData",LoanData);
         setLoanDetails(LoanData)
-      } catch (e) {
-        console.log(e);
       }
-    }
-
-    getLoan();
+      getLoan();
   }, []);
 
   // getting user profile  , user emi , 
@@ -97,33 +86,33 @@ export default function Payment() {
     // total amount implies --> total amount with intrest.
 
     const currentDate = new Date();
-    let paymentDetailsRequest;
-    if (prevPayments.length === 0) {
+    let  paymentDetailsRequest ; 
+    if(prevPayments.length===0){
       // for the first time no need to send repaymentMonts and remaining amount 
       // backend will automatically calculate it.
       const paymentDetails = {
-        paymentId: res.razorpay_payment_id,
-        totalAmount: LoanDetails?.totalAmountWithIntrest,
+        paymentId: res.razorpay_payment_id ,
+        totalAmount: LoanDetails?.totalAmountWithIntrest ,
         amountPaid: emi,
         remainingAmount: 0,
         totalPaymentMonths: parseInt(LoanDetails?.loanRepaymentMonths),
-        remainingPaymentMonths: 0,
+        remainingPaymentMonths : 0,
         dateOfPayment: currentDate.toISOString(),
         userProfileModel: {
           email: userData.email,
         },
       };
       paymentDetailsRequest = paymentDetails;
-    } else {
+    }else{
       // for the 2nd 3rd and so on ... we need to send the remaoing amount and months
-      const lastPaymnetFromDb = prevPayments[prevPayments.length - 1]
+      const lastPaymnetFromDb = prevPayments[prevPayments.length - 1 ]
       const paymentDetails = {
-        paymentId: res.razorpay_payment_id,
-        totalAmount: LoanDetails?.totalAmountWithIntrest,
+        paymentId: res.razorpay_payment_id ,
+        totalAmount: LoanDetails?.totalAmountWithIntrest ,
         amountPaid: emi,
         remainingAmount: lastPaymnetFromDb.remainingAmount,
         totalPaymentMonths: parseInt(LoanDetails?.loanRepaymentMonths),
-        remainingPaymentMonths: lastPaymnetFromDb.remainingPaymentMonths,
+        remainingPaymentMonths : lastPaymnetFromDb.remainingPaymentMonths,
         dateOfPayment: currentDate.toISOString(),
         userProfileModel: {
           email: userData.email,
@@ -144,10 +133,10 @@ export default function Payment() {
       body: JSON.stringify(paymentDetailsRequest),
     });
     const paymentRes = await r.json();
-    setprevPayments((prev) => {
-      return [...prev, paymentRes]
+    setprevPayments((prev)=>{
+      return [...prev,paymentRes]
     })
-    console.log("Payment is completed and the response from backend is:", paymentRes)
+    console.log("Payment is completed and the response from backend is:",paymentRes)
   }
 
   function handlePayment(e) {
