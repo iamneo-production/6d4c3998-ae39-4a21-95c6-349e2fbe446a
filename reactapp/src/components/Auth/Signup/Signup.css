@@ -4,7 +4,7 @@
   align-items: center; /* Align items to the top */
   min-height: calc(100vh - 40px); /* Adjust the value as needed to decrease space */
   /* background: radial-gradient(circle at center, #9e62ed, #ff6cb3); */
-  background-image: 'https://cdn.wallpapersafari.com/88/10/6JBtGF.jpg';
+  background-image: url('https://conconnect.com/assets/img/login-background.png');
   background-size: cover;
   padding: 20px; /* Increase padding for more space */
 }
