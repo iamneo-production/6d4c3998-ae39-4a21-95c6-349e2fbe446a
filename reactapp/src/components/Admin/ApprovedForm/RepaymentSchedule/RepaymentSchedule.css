@@ -1,101 +1,87 @@
 /* RepaymentSchedule.css */
 
 .container {
-    margin: 20px;
-  }
-  
-  .schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .schedule-table th,
-  .schedule-table td {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .schedule-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .schedule-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .schedule-table tr:hover {
-    background-color: #eaf6ff;
-    cursor: pointer;
-  }
-  
-  .dropdown {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
-  .dropdown p {
-    margin: 5px 0;
-  }
-  
-  .dropdown input[type="text"] {
-    width: 80%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .dropdown .pay-button,
-  .dropdown .close-button {
-    padding: 8px 16px;
-    margin-right: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .dropdown .pay-button:hover,
-  .dropdown .close-button:hover {
-    background-color: #45a049;
-  }
-  
-  .dropdown .pay-button:disabled {
-    background-color: #a9a9a9;
-    cursor: not-allowed;
-  }
-  
-  .click {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  /* Mobile Responsive Styles */
-  @media only screen and (max-width: 600px) {
-    .schedule-table th,
-    .schedule-table td {
-      padding: 5px;
-    }
-  
-    .dropdown {
-      padding: 5px;
-    }
-  
-    .dropdown input[type="text"] {
-      padding: 5px;
-    }
-  
-    .dropdown .pay-button,
-    .dropdown .close-button {
-      padding: 5px 10px;
-      margin-right: 5px;
-    }
-  }
+  margin: 20px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.schedule-table th {
+  background-color: #f2f2f2;
+}
+
+.schedule-table td button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.schedule-table td button.click {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+}
+
+.schedule-table td .dropdown {
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.schedule-table td .dropdown p {
+  margin-bottom: 10px;
+}
+
+.schedule-table td .dropdown input[type="text"] {
+  padding: 6px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.schedule-table td .dropdown .pay-button,
+.schedule-table td .dropdown .close-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.schedule-table td .dropdown .close-button {
+  background-color: #dc3545;
+}
+
+.schedule-table td .dropdown .pay-button:hover,
+.schedule-table td .dropdown .close-button:hover {
+  opacity: 0.8;
+}
+
+.schedule-table td .dropdown .pay-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.schedule-table td .dropdown .pay-button:disabled:hover {
+  opacity: 1;
+}
+
+.schedule-table td .dropdown .pay-button:not(:disabled):hover {
+  opacity: 0.8;
+}

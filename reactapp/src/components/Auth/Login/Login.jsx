@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
+// Utils 
+
 import UserContext from "../../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
 import { JwtTokenContext } from "../../../context/TokenContext";
 import { createTokenStorage } from "../../../utils/utils";
 
-import {toast} from 'react-toastify'
+// Toastify Import
+
+import { toast } from 'react-toastify'
+
+
 
 export default function Login() {
-  const notify = (meg)=>{toast(meg)}
+  const notify = (meg) => { toast(meg) }
   const lemail = localStorage.getItem("email");
   const lpassword = localStorage.getItem("password");
   const navigate = useNavigate();
@@ -33,7 +39,7 @@ export default function Login() {
       notify("Enter all fields");
     } else if (!emailRegex.test(email)) {
       notify("Invalid Email");
-      
+
     } else if (!passwordRegex.test(password)) {
       notify("Invalid Password")
     } else {
@@ -69,7 +75,7 @@ export default function Login() {
         }
       } catch (e) {
         setLoading(false)
-        
+
         console.log(e);
       }
     }
@@ -78,7 +84,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h1 className="login-title">{loading?'Loging..!': 'Login'}</h1>
+        <h1 className="login-title">{loading ? 'Loading..!' : 'Login'}</h1>
         <div data-testid="loginBox" className="loginBox">
           <div>
             <input
@@ -96,7 +102,7 @@ export default function Login() {
           </div>
           <div>
             <input
-              className="input-style-login"
+              class="input-style-login"
               data-testid="password"
               type="password"
               name="password"
@@ -108,6 +114,7 @@ export default function Login() {
               }}
             />
           </div>
+
           <div className="container-btn-para">
             <input
               data-testid="loginButton"

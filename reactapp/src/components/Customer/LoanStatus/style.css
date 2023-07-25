@@ -49,12 +49,19 @@ label {
 
 .trackButton {
     padding: 10px 20px;
-    background-color: rgb(34, 193, 34);
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.trackButton:hover{
+    color:black;
+    background-color:white;
+    border: 1px solid black;
+
 }
 
 /* .card-image {

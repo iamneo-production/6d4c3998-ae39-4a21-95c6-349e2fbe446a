@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../utils/utils";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 import "./ApplyForm.css";
 export default function DocumentComponent({ addLoan, responseDetails }) {
   const [loan, setLoan] = useState(null);
@@ -113,18 +119,42 @@ export default function DocumentComponent({ addLoan, responseDetails }) {
         {loan !== null &&
           Object.keys(loan).length !== 0 &&
           showLoan === true && (
-            <div className="response-loan-details">
-              <p>Loan id: {loan.loanId}</p>
-              <p>Applicant Name: {loan.applicantName}</p>
-              <p>Applicant Email: {loan.applicantEmail}</p>
-              <p>Loan Status :{loan.status}</p>
-              <button
-                onClick={() => {
-                  setShowLoan(false);
-                }}
-              >
-                close
-              </button>
+            <div >
+              <Dialog open={showLoan} fullWidth={true} maxWidth={`sm`}>
+                <DialogTitle style={{ fontWeight: "bold" }}>
+                  Loan Status
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ fontWeight: "bold" }}>
+                    Loan id: {loan.loanId}
+                  </DialogContentText>
+                  <DialogContentText style={{ fontWeight: "bold" }}>
+                    Email: {loan.applicantEmail}
+                  </DialogContentText>
+                  <DialogContentText style={{ fontWeight: "bold" }}>
+                    LoanStatus :{loan.status}
+                   
+                  </DialogContentText>
+                  <br />
+                  <hr />
+                  <br />
+                  <DialogContentText style={{ fontWeight: "bold" }}>
+                  {loan.status === "approve"
+                      ? "  You can see your monthly emi and other details in Profile Secition please visit!!"
+                      : " "}
+
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={() => {
+                      setShowLoan(false);
+                    }}
+                  >
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
           )}
         {/* Response box after loan is applied  new 1*/}
@@ -168,7 +198,7 @@ export default function DocumentComponent({ addLoan, responseDetails }) {
       </div>
 
       <div className="form-group">
-        <p>Images oŕ Documents(Upload below 2mb)</p>
+        <p style={{fontSize:'16px',fontFamliy:'Times New Roman',fontWeight:'bold'}}>⚠ Document Size Less than 2MB ⚠</p>
         {/* choose file */}
         <input
           className="input-form"

@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminNavbar from '../../../Navbar/AdminNavbar/AdminNavbar';
-import data from '../../../../data/data.json';
+import { BASE_URL } from '../../../../utils/utils';
 import './RepaymentSchedule.css';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function RepaymentSchedule() {
-  const [filteredData, setFilteredData] = useState([]);
-  const [openDropdownId, setOpenDropdownId] = useState(null);
-  const [paymentAmount, setPaymentAmount] = useState('');
-  const [remainingAmount, setRemainingAmount] = useState('');
+  const token = localStorage.getItem('jwtToken');
+  const [loanData, setLoanData] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
-  useState(() => {
-    const filtered = data.filter((item) => item.status === 'Approved');
-    setFilteredData(filtered);
-  }, []);
+  useEffect(() => {
+    async function fetchLoanData() {
+      try {
+        const res = await fetch(`${BASE_URL}/admin/getAllLoans`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) throw Error('Failed to get loan data');
+        const data = await res.json();
+        const approvedLoans = data.filter((loan) => loan.status === 'approve');
+        setLoanData(approvedLoans);
+      } catch (e) {
+        console.log(e.message, e);
+      }
+    }
+
+    fetchLoanData();
+  }, [token]);
 
   const calculateEmi = (loanAmount, repaymentMonths) => {
     const interestRate = 10.25 / 100;
@@ -23,32 +43,9 @@ function RepaymentSchedule() {
     return emi.toFixed(2);
   };
 
-  const handleCurrentOutstanding = (loanID) => {
-    setOpenDropdownId(loanID);
+  const handleEditNoteIconClick = () => {
+    setEditMode(true);
   };
-
-  const handleCloseDropdown = () => {
-    setOpenDropdownId(null);
-    setPaymentAmount('');
-  };
-
-  const handlePayment = (loanID) => {
-    const loan = filteredData.find((item) => item.applicantLoanID === loanID);
-    const emiAmount = calculateEmi(loan.applicantLoanamt, loan.applicantRepaymentMon);
-    const remaining = (parseFloat(emiAmount) - parseFloat(paymentAmount)).toFixed(2);
-    const finalloanamt = (parseFloat(loan.applicantLoanamt) - parseFloat(paymentAmount)).toFixed(2)
-    setRemainingAmount(remaining);
-    setPaymentAmount('');
-    alert(`Remaining EMI Amount: ₹ ${remaining} \nRemaining Loan Amount: ₹ ${finalloanamt}`);
-  };
-
-  const handleEditShcedule = (loanID) => {
-    //
-  }
-
-  const handleDeleteSchedule = (loanID) => {
-    //
-  }
 
   return (
     <>
@@ -59,51 +56,32 @@ function RepaymentSchedule() {
             <tr>
               <th>Loan ID</th>
               <th>Name</th>
-              <th>Salary</th>
               <th>Loan Amount</th>
-              <th>Repayment Months</th>
               <th>Interest</th>
+              <th>Repayment Months</th>
               <th>E.M.I</th>
-              <th>Curr. Outstanding</th>
-              <th>Edit Schedule</th>
-              <th>Del Schedule</th>
+              <th>Generate Sch</th>
+              <th>Edit Sch</th>
+              <th>Delete Sch</th>
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((item) => (
-              <tr key={item.applicantLoanID}>
-                <td>{item.applicantLoanID}</td>
+            {loanData.map((item) => (
+              <tr key={item.loanId}>
+                <td>{item.loanId}</td>
                 <td>{item.applicantName}</td>
-                <td>{item.applicantSalary}</td>
-                <td>{item.applicantLoanamt}</td>
-                <td>{item.applicantRepaymentMon}</td>
+                <td>{item.loanAmountRequired}</td>
                 <td>10.25%</td>
-                <td>{calculateEmi(item.applicantLoanamt, item.applicantRepaymentMon)}</td>
+                <td>{item.loanRepaymentMonths}</td>
+                <td>{calculateEmi(item.loanAmountRequired, item.loanRepaymentMonths)}</td>
                 <td>
-                  <button className='click' onClick={() => handleCurrentOutstanding(item.applicantLoanID)}>Click Here</button>
-                  {openDropdownId === item.applicantLoanID && (
-                    <div className="dropdown">
-                      <p>Current Outstanding: ₹ {calculateEmi(item.applicantLoanamt, item.applicantRepaymentMon)}</p>
-                      <input
-                        type="text"
-                        placeholder="Enter amount to pay"
-                        value={paymentAmount}
-                        onChange={(e) => setPaymentAmount(e.target.value)}
-                      />
-                      <button className="pay-button" onClick={() => handlePayment(item.applicantLoanID)}>
-                        Pay
-                      </button>
-                      <button className="close-button" onClick={handleCloseDropdown}>
-                        Close
-                      </button>
-                    </div>
-                  )}
+                  <ReceiptIcon style={{border: '1px solid black',cursor:'pointer',padding: '5px',borderRadius: '5px'}}/>
                 </td>
                 <td>
-                  <button className="click" onClick={() => handleEditShcedule(item.applicantLoanID)}>Click Here</button>
+                  <EditIcon style={{border: '1px solid black',cursor:'pointer',padding: '5px',borderRadius: '5px'}}/>
                 </td>
                 <td>
-                  <button className="click" onClick={() => handleDeleteSchedule(item.applicantLoanID)}>Click Here</button>
+                  <DeleteForeverIcon  style={{border: '1px solid black',cursor:'pointer',padding: '5px',borderRadius: '5px'}}/>
                 </td>
               </tr>
             ))}
