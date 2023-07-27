@@ -1,64 +1,73 @@
 import React, { useState, useEffect } from "react";
 import AdminNavbar from "../../Navbar/AdminNavbar/AdminNavbar";
 import { useNavigate, useParams } from "react-router-dom";
-import approvaldata from "../../../data/approvaldata.json";
 import { TextField, Button } from "@mui/material";
-import "./EditLoan.css";
-
-
-const LoanDetails = {
-  applicantLoanID: "",
-  applicantName: "",
-  applicantPhoneNo: "",
-  applicantEmail: "",
-  applicantAadhar: "",
-  applicantPanNo: "",
-  applicantSalary: "",
-  applicantLoanamt: "",
-  applicantRepaymentMon: "",
-};
+import { BASE_URL } from "../../../utils/utils";
+import "./EditLoan.css"
 
 const EditLoan = () => {
-  const [formData, setFormData] = useState(LoanDetails);
+  const token = localStorage.getItem("jwtToken");
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const [formData, setFormData] = useState({
+    applicantName: "",
+    applicantMobile: "",
+    applicantEmail: "",
+    applicantAadhaar: "",
+    applicantPan: "",
+    applicantSalary: "",
+    loanAmountRequired: "",
+    loanRepaymentMonths: ""
+  });
+
   useEffect(() => {
-    const editData = approvaldata.find((loan) => loan.applicantLoanID === id);
-    if (editData) {
-      setFormData(editData);
-    } else {
-      console.log("Data Not found");
-    }
-  }, [id, navigate]);
-
-  const handleInputChange = (e, key) => {
-    const currentData = {
-      ...formData,
-    };
-    currentData[key] = e.target.value;
-    setFormData(currentData);
-  };
-
-  const handleFormEdit = (e) => {
-    e.preventDefault();
-    editStudent();
-  };
-
-  const editStudent = () => {
-    const updatedData = approvaldata.map((loan) => {
-      if (loan.applicantLoanID === id) {
-        return formData;
+    async function getLoanData() {
+      try {
+        const res = await fetch(`${BASE_URL}/admin/getAllLoans`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) throw Error("Failed to get loan data");
+        const data = await res.json();
+        const loan = data.find((loan) => loan.loanId === parseInt(id));
+        setFormData(loan);
+      } catch (error) {
+        console.log(error.message, error);
       }
-      return loan;
-    });
+    }
 
+    getLoanData();
+  }, [id, token]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormEdit = async (e) => {
+    e.preventDefault();
     try {
-      localStorage.setItem('approvalData', JSON.stringify(updatedData));
-      console.log("Student details updated successfully.");
-      navigate("/admin/getAllLoans");
+      const res = await fetch(`${BASE_URL}/admin/editLoan/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        navigate("/admin/getAllLoans"); // Redirect to loans page after successful edit
+      } else {
+        throw Error("Failed to edit loan");
+      }
     } catch (error) {
-      console.error("Error updating student details:", error);
+      console.log(error.message, error);
     }
   };
 
@@ -68,67 +77,67 @@ const EditLoan = () => {
 
       <form onSubmit={handleFormEdit} className="edit-loan-form">
         <TextField
-          label="Loan ID"
-          value={formData.applicantLoanID}
-          onChange={(e) => handleInputChange(e, "applicantLoanID")}
-          disabled
-        />
-
-        <TextField
           label="Name"
           value={formData.applicantName}
-          onChange={(e) => handleInputChange(e, "applicantName")}
+          name="applicantName"
+          onChange={handleInputChange}
         />
 
         <TextField
-          label="Phone Number"
-          value={formData.applicantPhoneNo}
-          onChange={(e) => handleInputChange(e, "applicantPhoneNo")}
+          label="Mobile Number"
+          value={formData.applicantMobile}
+          name="applicantMobile"
+          onChange={handleInputChange}
         />
 
         <TextField
           label="Email"
           value={formData.applicantEmail}
-          onChange={(e) => handleInputChange(e, "applicantEmail")}
-          disabled
+          name="applicantEmail"
+          onChange={handleInputChange}
         />
 
         <TextField
-          label="Aadhar Number"
-          value={formData.applicantAadhar}
-          onChange={(e) => handleInputChange(e, "applicantAadhar")}
+          label="Aadhar"
+          value={formData.applicantAadhaar}
+          name="applicantAadhaar"
+          onChange={handleInputChange}
         />
 
         <TextField
-          label="PAN Number"
-          value={formData.applicantPanNo}
-          onChange={(e) => handleInputChange(e, "applicantPanNo")}
+          label="PAN"
+          value={formData.applicantPan}
+          name="applicantPan"
+          onChange={handleInputChange}
         />
 
         <TextField
           label="Salary"
           value={formData.applicantSalary}
-          onChange={(e) => handleInputChange(e, "applicantSalary")}
-          disabled
+          name="applicantSalary"
+          onChange={handleInputChange}
         />
 
         <TextField
           label="Loan Amount"
-          value={formData.applicantLoanamt}
-          onChange={(e) => handleInputChange(e, "applicantLoanamt")}
+          value={formData.loanAmountRequired}
+          name="loanAmountRequired"
+          onChange={handleInputChange}
         />
 
         <TextField
           label="Repayment Months"
-          value={formData.applicantRepaymentMon}
-          onChange={(e) => handleInputChange(e, "applicantRepaymentMon")}
+          value={formData.loanRepaymentMonths}
+          name="loanRepaymentMonths"
+          onChange={handleInputChange}
         />
 
-        <Button variant="contained" type="submit">Update</Button>
+        <Button variant="contained" type="submit">
+          Update
+        </Button>
       </form>
     </div>
   );
 };
-
 
 export default EditLoan;

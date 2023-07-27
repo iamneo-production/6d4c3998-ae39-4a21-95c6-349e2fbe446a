@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Link } from "react-router-dom";
 import {signUpUser,loginUser} from "../../../utils/userApi"
-import  {toast} from 'react-toastify'
+
 import './Signup.css'
+import { ToastContainer, toast } from 'react-toastify';
+//  npm i react-toastify@9.0.3
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
-  const toastMsg = (msg) => toast(msg);
   const [userType, setAdminOrUser] = useState("");
   
   const [email, setEmail] = useState("");
@@ -14,49 +16,46 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false)
-
+  const notify = (msg)=>{toast(msg)}
    const emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
-  // /^[a-zA-Z0-9]{4,}$/
+
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
   const mobileNumberRegex = /^\d{10}$/;
 
 
 
- async  function handleSignup(){
+   function handleSignup(){
     if(userType==="" ||  email==="" || userName==="" || mobileNumber==="" || password==="" || confirmPassword===""){
-      toastMsg("Please enter all fields")
-      console.log("Please enter all details")
+      
+      notify("Please enter all details")
     }
     else if(!emailRegex.test(email)){
       
-      console.log("Invalid Email");
-      toastMsg("Invalid Email");
-      return;
+      notify("Invalid Email");
+     
+      
     }
     else if(!passwordRegex.test(password)){  
-      toastMsg("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      console.log("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
-      return;
+      notify("Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!")
+      
     }
     else if(password!==confirmPassword){
-      toastMsg("Passwords does not match")
-      return;
+      notify("Passcodes does'nt match")
     }
     else if(!mobileNumberRegex.test(mobileNumber)){
-      console.log("Invalid mobile number");
-      toastMsg("Invalid Mobile no.");
-      return;
+      notify("Invalid mobile number");
+    
     }
     else{
-
-      const response= await signUpUser(email,mobileNumber,password,userType,userName,setLoading)
+      setLoading(true);
+      signUpUser(email,mobileNumber,password,userType,userName,setLoading)
      
     }
   }
   return (
     <div className="register-container">
     <div className="register-form">
-      <h1 className="navbar-register"> {loading?"Processing" : "Register"} </h1>
+      <h1 className="navbar-register"> {loading?'Processing' : 'Register'} </h1>
   
    
         <input
@@ -66,7 +65,7 @@ export default function Signup() {
           name="user"
           id="user"
           placeholder="Enter admin/user"
-          value='user'
+          value={userType}
           onChange={(e) => {
             setAdminOrUser(e.target.value);
           }}

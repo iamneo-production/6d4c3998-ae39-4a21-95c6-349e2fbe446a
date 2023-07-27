@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+
 import UserContext from "../../../context/UserContext";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../utils/userApi";
 import { JwtTokenContext } from "../../../context/TokenContext";
-import {createTokenStorage} from "../../../utils/utils"
+import { createTokenStorage } from "../../../utils/utils";
+
+import {toast} from 'react-toastify'
 
 export default function Login() {
-  // TOAST //
-  const loginToast = (msg) => toast(msg);
-
+  const notify = (meg)=>{toast(meg)}
+  const lemail = localStorage.getItem("email");
+  const lpassword = localStorage.getItem("password");
   const navigate = useNavigate();
   const { userModel, setUserModel } = useContext(UserContext);
-  const {setJwtToken} = useContext(JwtTokenContext);
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { setJwtToken } = useContext(JwtTokenContext);
+
+  const [email, setEmail] = useState(lemail);
+  const [password, setPassword] = useState(lpassword);
+
   const [loading, setLoading] = useState(false)
 
   const emailRegex =
@@ -28,64 +30,62 @@ export default function Login() {
 
   async function handleLogin() {
     if (email === "" || password === "") {
-      loginToast("Enter all fields")
-      console.log("Enter all fields");
+      notify("Enter all fields");
     } else if (!emailRegex.test(email)) {
-      loginToast("Invalid Email");
-      console.log("Invalid Email");
-      return;
+      notify("Invalid Email");
+      
     } else if (!passwordRegex.test(password)) {
-      loginToast(
-        "Password must contaion atleast 8 characters, including one number, one lower and upper case character and one special charaacter like #,@,$,!"
-      );
-      return;
+      notify("Invalid Password")
     } else {
       setLoading(true)
-      const response = await loginUser(email, password,setLoading);
+      try {
+        const response = await loginUser(email, password);
 
-      const data =await response.json();
-      console.log("userModel is :",data.userModel)
-      console.log("login :",data.success)
-     
-      
-     if(data.success ===true){
-      setLoading(false)
-      if (data.userModel.userRole === "user") {
-        console.log(data.token)
-        setJwtToken(data.token)
-        setUserModel(data.userModel);
-        createTokenStorage(data.token)
-        navigate("/user/home");
-      } else if(data.userModel.userRole === "admin"){
-        console.log(data.token)
-        setJwtToken(data.token)
-        setUserModel(data.userModel);
-        createTokenStorage(data.token)
-        navigate("/admin/home");
-      }
-      
-     }
-      
-      else if(data.success === false) {
+        if (!response.ok) throw Error("Error loging");
+        const data = await response.json();
+
+        if (data.success === true) {
+          if (data.userModel.userRole === "user") {
+            console.log(data.token);
+            setJwtToken(data.token);
+            setUserModel(data.userModel);
+            createTokenStorage(data.token);
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+            navigate("/user/home");
+          } else if (data.userModel.userRole === "admin") {
+            console.log(data.token);
+            setJwtToken(data.token);
+            setUserModel(data.userModel);
+            createTokenStorage(data.token);
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+            navigate("/admin/home");
+          }
+          setLoading(false)
+        } else if (data.success === false) {
+          setLoading(false)
+          console.log("Invalid email or password");
+        }
+      } catch (e) {
         setLoading(false)
-        loginToast("Invalid email or password");
-        console.log("Invalid email or password");
+        
+        console.log(e);
       }
-
-
     }
   }
 
   return (
     <div className="login-container">
       <div className="login-form">
-        <h1 className="login-title">{loading?"Loging...!":'Login'}</h1>
+        <h1 className="login-title">{loading?'Loging..!': 'Login'}</h1>
         <div data-testid="loginBox" className="loginBox">
           <div>
             <input
               className="input-style-login"
               data-testid="email"
               type="email"
+              value={email}
               name="email"
               id="email"
               placeholder="Enter email"
@@ -100,6 +100,7 @@ export default function Login() {
               data-testid="password"
               type="password"
               name="password"
+              value={password}
               id="password"
               placeholder="Enter Password"
               onChange={(e) => {
@@ -120,7 +121,7 @@ export default function Login() {
             />
             <p className="loginPara">
               &nbsp; New user/admin
-              <Link data-testid="signupLink" id="signupLink"  to="/user/signup">
+              <Link data-testid="signupLink" id="signupLink" to="/user/signup">
                 &nbsp; Signup
               </Link>
             </p>

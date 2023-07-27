@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center; /* Align items to the top */
   min-height: calc(100vh - 40px); /* Adjust the value as needed to decrease space */
-  background: radial-gradient(circle at center, #9e62ed, #ff6cb3);
+  /* background: radial-gradient(circle at center, #9e62ed, #ff6cb3); */
+  background-image: 'https://cdn.wallpapersafari.com/88/10/6JBtGF.jpg';
   background-size: cover;
   padding: 20px; /* Increase padding for more space */
 }
@@ -31,6 +32,7 @@
 
 .container-btn-para {
   display: inline-flex;
+  align-items: center;
   justify-content: space-evenly; /* Add space between the items */
   margin-bottom: 30px;
 }
@@ -52,7 +54,7 @@
   order: 2; /* Change the order to display the paragraph second */
   font-family: 'Times New Roman', Times, serif;
   font-size: 18px;
-  margin-top: 26px;
+  padding-top: 3px;
 }
 
 .signup-button:hover {
