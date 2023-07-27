@@ -1,5 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../../../utils/utils";
+import "./Payment.css";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import ListItemText from '@mui/material/ListItemText';
+import ListItem from '@mui/material/ListItem';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 
 export default function Payment() {
   const [userData, setuserData] = useState(null);
@@ -7,7 +25,19 @@ export default function Payment() {
   const [paymentId, setPaymentId] = useState("");
   const [LoanDetails, setLoanDetails] = useState(null);
   const token = localStorage.getItem("jwtToken");
-  const [prevPayments, setprevPayments] = useState([])
+  const [prevPayments, setprevPayments] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = (loanId) => {
+    setOpen(true);
+  };
+
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   console.log("prvious paymenyts", prevPayments)
   // we need to get a previous payment if the user has made any prev paymnet 
 
@@ -182,13 +212,38 @@ export default function Payment() {
     }
   }
   return (
-    <div>
+    <div className="container-payment">
       <div>
-        <h1>Your Payments</h1>
-        <div>Monthly Emi : {emi}</div>
+        <h2 style={{color:"black"}}>Hi User</h2>
+        <h2 style={{color:"black"}}>Welcome to Payments Page</h2>
+        <h3>Monthly Emi : {emi}</h3>
       </div>
-      <button onClick={handlePayment}>pay emi</button>
-      <button>view payment history</button>
+      <div class="paybutton-container">
+      <button onClick={handlePayment} className="button-payment" disabled={emi === 0}>Pay Your Monthly Emi </button>
+      <button onClick={handleClickOpen} className="button-payments">View Payment History</button>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'relative' }} style={{ backgroundColor: "white", color: "black" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Payment History of User
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Dialog>
+      </div>
     </div>
   );
 }

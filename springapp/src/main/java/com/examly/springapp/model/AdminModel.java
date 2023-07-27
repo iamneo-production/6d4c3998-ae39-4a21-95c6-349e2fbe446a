@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 @Entity
 public class AdminModel {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 			int id;
