@@ -1,3 +1,12 @@
-puppeteer/test.js
-node_modules
-done 
+node_modules/
+done
+junit
+target
+.vscode/
+# react
+# puppeteer
+
+node_modules/
+
+springapp/.classpath
+springapp/.project
