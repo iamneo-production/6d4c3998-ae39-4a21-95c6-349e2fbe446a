@@ -1,4 +1,4 @@
-package main.javacom.examly.springapp;
+package com.examly.springapp;
 
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
